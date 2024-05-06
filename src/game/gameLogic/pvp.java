@@ -79,7 +79,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
     int counter2=1000;
     int pauseCounter=0;
     int pause=0;
-    String fileName="D:\\NetbeansProject\\practice\\src\\Sounds\\pvp2.wav";
+    String fileName="src/Sounds/pvp2.wav";
     BGMusic bgm=new BGMusic(1);
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -358,7 +358,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
      
  public void whenWin(){
         bgm.stopBackgroundAudio();
-        String filepath="D:\\NetbeansProject\\practice\\src\\Sounds\\victory.wav";
+        String filepath="src/Sounds/victory.wav";
         
         try{
             File musicpath=new File(filepath);
@@ -372,7 +372,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
  }
      
      public void whenDamage(){
-        String filepath="C:\\Users\\Arturo Alvarez\\Downloads\\roblox.wav";
+        String filepath="src/Sounds/roblox.wav";
         
         try{
             File musicpath=new File(filepath);

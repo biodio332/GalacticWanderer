@@ -4,7 +4,10 @@
  */
 package game;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,7 +20,9 @@ import java.sql.Statement;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,6 +61,17 @@ public class Login extends javax.swing.JFrame {
         
         btnLogin.addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseEntered(MouseEvent e) {
+                btnLogin.setForeground(Color.YELLOW); 
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                fadeText(btnLogin, Color.WHITE);
+            }
+            
+            
+            @Override
             public void mouseClicked(MouseEvent e) {
                 try{
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -87,6 +103,16 @@ public class Login extends javax.swing.JFrame {
         
         btnRegister.addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseEntered(MouseEvent e) {
+                btnRegister.setForeground(Color.YELLOW); 
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                fadeText(btnRegister, Color.WHITE);
+            }
+            
+            @Override
             public void mouseClicked(MouseEvent e) {
                 new Register().setVisible(true);
                 Login.this.dispose();
@@ -95,10 +121,41 @@ public class Login extends javax.swing.JFrame {
         
         btnExit.addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseEntered(MouseEvent e) {
+                btnExit.setForeground(Color.YELLOW); 
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                fadeText(btnExit, Color.WHITE);
+            }
+            
+            @Override
             public void mouseClicked(MouseEvent e) {
                 Login.this.dispose();
             }
         });
+    }
+    
+    private void fadeText(JLabel label, Color originalColor) {
+        Timer timer = new Timer(10, new ActionListener() {
+            float alpha = 1.0f;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                alpha -= 0.05f;
+                if (alpha <= 0.0f) {
+                    ((Timer) e.getSource()).stop();
+                    label.setForeground(originalColor);
+                } else {
+                    label.setForeground(new Color(
+                            (int) (originalColor.getRed() * alpha + 255 * (1 - alpha)),
+                            (int) (originalColor.getGreen() * alpha + 255 * (1 - alpha)),
+                            (int) (originalColor.getBlue() * alpha + 255 * (1 - alpha))
+                    ));
+                }
+            }
+        });
+        timer.start();
     }
 
     /**
