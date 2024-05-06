@@ -145,7 +145,7 @@ ArrayList<Player> player = new ArrayList<>(); //arraylist for the table
  Logger.getLogger(Leaderboards.class.getName()).log(Level.SEVERE, null, ex);
  }
  }
-   String filepath="D:\\NetbeansProject\\practice\\src\\Sounds\\background1.wav";
+   String filepath="src/Sounds/background1.wav";
     BGMusic bgm=new BGMusic(1);
 
 
