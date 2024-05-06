@@ -31,7 +31,7 @@ public class CharacterPicking extends javax.swing.JFrame {
             File fontStyle = new File("src/fonts/8-bit-hud.ttf");
             Font font = Font.createFont(Font.TRUETYPE_FONT,fontStyle);
             
-            Font playerFont = font.deriveFont(26f);
+            Font playerFont = font.deriveFont(28f);
             lblPlayer.setFont(playerFont);
 
             Font charFont = font.deriveFont(20f);
@@ -40,7 +40,7 @@ public class CharacterPicking extends javax.swing.JFrame {
             lblChar3.setFont(charFont);
             lblChar4.setFont(charFont);
             
-            Font btnFont = font.deriveFont(30f);
+            Font btnFont = font.deriveFont(26f);
             lblConfirm.setFont(btnFont);
             lblBack.setFont(btnFont);
             
@@ -273,7 +273,7 @@ public class CharacterPicking extends javax.swing.JFrame {
         getContentPane().add(lblBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, -1, -1));
 
         charPickbg.setForeground(new java.awt.Color(255, 255, 255));
-        charPickbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/charpickScreen.jpg"))); // NOI18N
+        charPickbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/charSelectbg.gif"))); // NOI18N
         getContentPane().add(charPickbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, -10, 1280, 720));
 
         pack();

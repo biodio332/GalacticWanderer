@@ -198,6 +198,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }// </editor-fold>//GEN-END:initComponents
     
     
+    
     public void characterDamage(){
      //wala pay character
     }

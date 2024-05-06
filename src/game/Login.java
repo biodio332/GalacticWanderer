@@ -121,13 +121,15 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogin.setText("Login");
-        getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, -1, -1));
+        lblLogin.setText("Galactic Wanderers");
+        getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
-        txtUsername.setBackground(new java.awt.Color(204, 255, 255));
+        txtUsername.setBackground(new java.awt.Color(0, 0, 0));
+        txtUsername.setForeground(new java.awt.Color(153, 255, 255));
         txtUsername.setActionCommand("<Not Set>");
-        txtUsername.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
+        txtUsername.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(204, 153, 0)));
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -148,9 +150,10 @@ public class Login extends javax.swing.JFrame {
         btnExit.setText("Exit");
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 610, -1, -1));
 
-        pwdPassword.setBackground(new java.awt.Color(204, 255, 255));
+        pwdPassword.setBackground(new java.awt.Color(0, 0, 0));
+        pwdPassword.setForeground(new java.awt.Color(153, 255, 255));
         pwdPassword.setActionCommand("<Not Set>");
-        pwdPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
+        pwdPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(204, 153, 0)));
         pwdPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pwdPasswordActionPerformed(evt);
@@ -158,8 +161,10 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(pwdPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 350, 40));
 
+        lblBackground.setForeground(new java.awt.Color(153, 255, 255));
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/GWTitleScreen.gif"))); // NOI18N
-        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, -1, -1));
+        lblBackground.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

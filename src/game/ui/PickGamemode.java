@@ -109,7 +109,7 @@ public class PickGamemode extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SMbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/space (1).gif"))); // NOI18N
+        SMbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/SMbg.gif"))); // NOI18N
         jPanel1.add(SMbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 330));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 400, 350));
