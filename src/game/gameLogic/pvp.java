@@ -165,6 +165,11 @@ public class pvp extends javax.swing.JFrame implements GameState {
         getContentPane().add(btnskill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
 
         btnskill2.setText("Skill 2");
+        btnskill2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnskill2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnskill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, -1, -1));
 
         btnskill3.setText("Skill 3");
@@ -394,15 +399,15 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }//GEN-LAST:event_btnPauseActionPerformed
 
     private void btnskill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnskill1ActionPerformed
-        // TODO add your handling code here:
+        //FIRST SKILL LOGIC - 1ST PLAYER
         Random rand=new Random();
-        int dmg=rand.nextInt(100)+1;
+        int dmg=10;
         player2hp-=dmg;
         turncount=2;
+        
         turn();
-         whenDamage();
-        playerHp();
-      
+        whenDamage();
+        playerHp();     
     }//GEN-LAST:event_btnskill1ActionPerformed
 
     private void btnUnpauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnpauseActionPerformed
@@ -414,16 +419,38 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }//GEN-LAST:event_btnUnpauseActionPerformed
 
     private void btn2skill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2skill1ActionPerformed
-        // TODO add your handling code here:
+        //SECOND SKILL LOGIC - 2ND PLAYER
         Random rand=new Random();
-        int dmg=rand.nextInt(100)+1;
+        
+        int dmg=rand.nextInt(15)+10;
         player1hp-=dmg;
         turncount=1;
+        
         turn();
         whenDamage();
         playerHp();
-       
     }//GEN-LAST:event_btn2skill1ActionPerformed
+
+    private void btnskill2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnskill2ActionPerformed
+        // HEAL LOGIC - 1ST PLAYER
+        Random rand = new Random();
+        int heal = 5;
+        int randomizer = rand.nextInt(10);
+
+        int playerhpheal = heal + randomizer;
+        player1hp += playerhpheal;
+
+        if (player1hp > 100) {
+            player1hp = 100;
+        }
+
+        pgPlayer1.setValue(player1hp);
+
+        turncount = 2;
+        turn();
+        whenDamage();
+        playerHp();     
+    }//GEN-LAST:event_btnskill2ActionPerformed
 
     /**
      * @param args the command line arguments

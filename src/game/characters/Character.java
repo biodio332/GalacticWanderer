@@ -16,8 +16,6 @@ public class Character {
         this.choice=choice;
     }
     
-    
-    
     public void setPlayerNum(int playerNum){
         this.playerNum=playerNum;
     }
