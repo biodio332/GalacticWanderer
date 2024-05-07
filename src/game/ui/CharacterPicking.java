@@ -131,7 +131,8 @@ public class CharacterPicking extends javax.swing.JFrame {
             lblPlayer.setText("Player 2");
             confirm++;
             if(confirm==2){
-                    new pvp(character1,character2).setVisible(true);
+                    //pvp characters = new pvp(character1, character2);
+                    new PickBackground(character1,character2).setVisible(true);
                     setVisible(false);
                 }
             }
@@ -140,7 +141,7 @@ public class CharacterPicking extends javax.swing.JFrame {
         lblBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (confirm==0) {
+                if (confirm==0) {                    
                     CharacterPicking.this.dispose();
                     new PickGamemode().setVisible(true);
                 } else if (confirm==1){
@@ -274,7 +275,8 @@ public class CharacterPicking extends javax.swing.JFrame {
 
         charPickbg.setForeground(new java.awt.Color(255, 255, 255));
         charPickbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/charSelectbg.gif"))); // NOI18N
-        getContentPane().add(charPickbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, -10, 1280, 720));
+        charPickbg.setAlignmentY(0.0F);
+        getContentPane().add(charPickbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
