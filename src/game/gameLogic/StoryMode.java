@@ -13,11 +13,23 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Sounds.BGMusic;
+import game.Menu;
+import game.Leaderboards;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.io.File;
 import static java.lang.Thread.sleep;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import game.characters.Character;
 
 /**
  *
@@ -28,11 +40,19 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     /**
      * Creates new form StoryMode
      */
-    public StoryMode() {
+    
+    Character objChoice = new Character();
+    
+    public StoryMode(){}
+    
+    public StoryMode(int character) {
         initComponents();
+        initCharacters(character);
+        objChoice.setChoice(character);
         setVisibleAllFalse();
-        try{
-            
+        storyDialogue(stDialogues());  
+        skillsInActive();
+        try{            
             File fontStyle = new File("src/fonts/8-bit-hud.ttf");
             Font font = Font.createFont(Font.TRUETYPE_FONT,fontStyle);
             
@@ -40,34 +60,36 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
             lblTime.setFont(timerFont);
 
             Font nameFont = font.deriveFont(12f);
-           lblPlayer.setFont(nameFont);
-           lblEnemy.setFont(nameFont);
-           btnContinue.setFont(nameFont);
-           btnContinue.setVisible(false);
-           btnFight.setFont(nameFont);
-           lblNameEnemy.setFont(nameFont);
-           randomDialogue.setFont(nameFont);
-           Font dialogueFont = font.deriveFont(9f);
-           dialogue.setFont(dialogueFont);
-           dialogue2.setFont(dialogueFont);
-           dialogue3.setFont(dialogueFont);
-           dialogue4.setFont(dialogueFont);
-           dialogue5.setFont(dialogueFont);
-           dialogue6.setFont(dialogueFont);
-           dialogue7.setFont(dialogueFont);
-           dialogue8.setFont(dialogueFont);
-           dialogue9.setFont(dialogueFont);
-           enemyIntro1.setFont(dialogueFont);
-           enemyIntro2.setFont(dialogueFont);
-           enemyIntro3.setFont(dialogueFont);
-           enemyIntro4.setFont(dialogueFont);
-           enemyIntro5.setFont(dialogueFont);
-           enemyIntro6.setFont(dialogueFont);
+            lblPlayer.setFont(nameFont);
+            lblEnemy.setFont(nameFont);
+            btnContinue.setFont(nameFont);
+            btnContinue.setVisible(false);
+            btnFight.setFont(nameFont);
+            lblNameEnemy.setFont(nameFont);
+            randomDialogue.setFont(nameFont);
+            
+            Font dialogueFont = font.deriveFont(9f);
+            dialogue.setFont(dialogueFont);
+            dialogue2.setFont(dialogueFont);
+            dialogue3.setFont(dialogueFont);
+            dialogue4.setFont(dialogueFont);
+            dialogue5.setFont(dialogueFont);
+            dialogue6.setFont(dialogueFont);
+            dialogue7.setFont(dialogueFont);
+            dialogue8.setFont(dialogueFont);
+            dialogue9.setFont(dialogueFont);
+            enemyIntro1.setFont(dialogueFont);
+            enemyIntro2.setFont(dialogueFont);
+            enemyIntro3.setFont(dialogueFont);
+            enemyIntro4.setFont(dialogueFont);
+            enemyIntro5.setFont(dialogueFont);
+            enemyIntro6.setFont(dialogueFont);
+            SpecialIntro.setFont(dialogueFont);
         } catch (Exception e)
         {
             e.printStackTrace();
         }
-        
+        IntroDialogues();
        gamePlay();
         
     }
@@ -94,9 +116,9 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         dialogue8 = new javax.swing.JLabel();
         dialogue9 = new javax.swing.JLabel();
         btnContinue = new javax.swing.JLabel();
+        btnSkip = new javax.swing.JLabel();
         pnlIntroduceEnemy = new javax.swing.JPanel();
         lblNameEnemy = new javax.swing.JLabel();
-        imgEnemy = new javax.swing.JLabel();
         enemyIntro1 = new javax.swing.JLabel();
         btnFight = new javax.swing.JLabel();
         enemyIntro6 = new javax.swing.JLabel();
@@ -104,20 +126,23 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         enemyIntro3 = new javax.swing.JLabel();
         enemyIntro4 = new javax.swing.JLabel();
         enemyIntro5 = new javax.swing.JLabel();
-        lblplay = new javax.swing.JLabel();
+        SpecialIntro = new javax.swing.JLabel();
+        imgEnemy = new javax.swing.JLabel();
         pgEnemy = new javax.swing.JProgressBar();
         pgPlayer = new javax.swing.JProgressBar();
+        lblCharacter = new javax.swing.JLabel();
+        enemy1 = new javax.swing.JLabel();
         btnSkill1 = new javax.swing.JButton();
         btnSkill2 = new javax.swing.JButton();
         btnSkill3 = new javax.swing.JButton();
         btnSkill4 = new javax.swing.JButton();
-        enemy1 = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
         btnPause = new javax.swing.JButton();
         lblPlayer = new javax.swing.JLabel();
         lblEnemy = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlRandomDialogue = new javax.swing.JPanel();
         randomDialogue = new javax.swing.JLabel();
+        EnemyChecker = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
         btnUnpause = new javax.swing.JButton();
@@ -134,23 +159,18 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         pnlDialogue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dialogue5.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue5.setText("Four foes arise, ");
         pnlDialogue.add(dialogue5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 1200, 30));
 
         dialogue2.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue2.setText("stars gleam bright, ");
         pnlDialogue.add(dialogue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1160, 60));
 
         dialogue.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue.setText("In the cosmic expanse, where stars gleam bright,");
         pnlDialogue.add(dialogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1170, 70));
 
         dialogue3.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue3.setText("Galactic Wanderer ");
         pnlDialogue.add(dialogue3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1130, 30));
 
         dialogue4.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue4.setText("soars through YESDASDSAD ASDASDASDAS DASDSADASDSA");
         pnlDialogue.add(dialogue4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 1210, 20));
 
         checker.setText("checker");
@@ -160,19 +180,15 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         pnlDialogue.add(checker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, -1));
 
         dialogue6.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue6.setText("Four foes arise, ");
         pnlDialogue.add(dialogue6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 1210, 20));
 
         dialogue7.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue7.setText("Four foes arise, ");
         pnlDialogue.add(dialogue7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 1220, 20));
 
         dialogue8.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue8.setText("Four foes arise, ");
         pnlDialogue.add(dialogue8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 1220, 20));
 
         dialogue9.setForeground(new java.awt.Color(255, 255, 255));
-        dialogue9.setText("Four foes arise, ");
         pnlDialogue.add(dialogue9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 1210, 50));
 
         btnContinue.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,21 +200,25 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         });
         pnlDialogue.add(btnContinue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 580, 230, 60));
 
+        btnSkip.setForeground(new java.awt.Color(255, 255, 255));
+        btnSkip.setText("Skip");
+        btnSkip.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSkipMouseClicked(evt);
+            }
+        });
+        pnlDialogue.add(btnSkip, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 660, -1, -1));
+
         getContentPane().add(pnlDialogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pnlIntroduceEnemy.setBackground(new java.awt.Color(0, 0, 0));
         pnlIntroduceEnemy.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNameEnemy.setForeground(new java.awt.Color(255, 255, 255));
-        lblNameEnemy.setText("MIGANTRON");
         lblNameEnemy.setToolTipText("");
         pnlIntroduceEnemy.add(lblNameEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, -1, 20));
 
-        imgEnemy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/marga.jpg"))); // NOI18N
-        pnlIntroduceEnemy.add(imgEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 80, -1, -1));
-
         enemyIntro1.setForeground(new java.awt.Color(255, 255, 255));
-        enemyIntro1.setText("Migantron's realm was a labyrinth of shadow and illusion, ");
         pnlIntroduceEnemy.add(enemyIntro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 10));
 
         btnFight.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,31 +231,37 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         pnlIntroduceEnemy.add(btnFight, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 330, -1, -1));
 
         enemyIntro6.setForeground(new java.awt.Color(255, 255, 255));
-        enemyIntro6.setText("carried with it the promise of untold power and unimaginable darkness.");
+        enemyIntro6.setRequestFocusEnabled(false);
         pnlIntroduceEnemy.add(enemyIntro6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 930, -1));
 
         enemyIntro2.setForeground(new java.awt.Color(255, 255, 255));
-        enemyIntro2.setText(" Her eyes, twin orbs of gleaming obsidian, held the secrets of a thousand forgotten galaxies, each glance a silent invitation to the abyss that lurked within her soul.");
         pnlIntroduceEnemy.add(enemyIntro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 930, -1));
 
         enemyIntro3.setForeground(new java.awt.Color(255, 255, 255));
-        enemyIntro3.setText("each glance a silent invitation to the abyss that lurked within her soul.  Her eyes, twin orbs of gleaming obsidian,");
         pnlIntroduceEnemy.add(enemyIntro3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 930, -1));
 
         enemyIntro4.setForeground(new java.awt.Color(255, 255, 255));
-        enemyIntro4.setText("held the secrets of a thousand forgotten galaxies, each glance a silent invitation to the abyss that lurked within her soul. ");
         pnlIntroduceEnemy.add(enemyIntro4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 930, -1));
 
         enemyIntro5.setForeground(new java.awt.Color(255, 255, 255));
-        enemyIntro5.setText("Her voice, a melodic whisper that echoed through the void, ");
         pnlIntroduceEnemy.add(enemyIntro5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 930, -1));
 
-        getContentPane().add(pnlIntroduceEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1280, 370));
+        SpecialIntro.setForeground(new java.awt.Color(255, 255, 255));
+        pnlIntroduceEnemy.add(SpecialIntro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 930, -1));
 
-        lblplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alienpls3-alienpls.gif"))); // NOI18N
-        getContentPane().add(lblplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 60, 110));
+        imgEnemy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/marga.jpg"))); // NOI18N
+        pnlIntroduceEnemy.add(imgEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 80, -1, -1));
+
+        getContentPane().add(pnlIntroduceEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1280, 370));
         getContentPane().add(pgEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 430, 30));
         getContentPane().add(pgPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 430, 30));
+
+        lblCharacter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/idle/char-brettIdle-unscreen.gif"))); // NOI18N
+        getContentPane().add(lblCharacter, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
+
+        enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Migantron/Idle/char-miganIdle-unscreen.gif"))); // NOI18N
+        getContentPane().add(enemy1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 200, -1, -1));
+        enemy1.getAccessibleContext().setAccessibleParent(this);
 
         btnSkill1.setText("Skill1");
         btnSkill1.addActionListener(new java.awt.event.ActionListener() {
@@ -270,9 +296,6 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         });
         getContentPane().add(btnSkill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
 
-        enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/enemy1.gif"))); // NOI18N
-        getContentPane().add(enemy1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 520, 470));
-
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setText("30");
         getContentPane().add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 60, 270, 20));
@@ -295,10 +318,11 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         lblEnemy.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         getContentPane().add(lblEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 50, 256, 20));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(randomDialogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 590, 60));
+        pnlRandomDialogue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlRandomDialogue.add(randomDialogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 590, 60));
+        pnlRandomDialogue.add(EnemyChecker, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 620, 1260, 100));
+        getContentPane().add(pnlRandomDialogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 1260, 100));
 
         lblBackground.setForeground(new java.awt.Color(255, 255, 255));
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/pvpScreen.gif"))); // NOI18N
@@ -318,7 +342,19 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void initCharacters(int character) {
+        switch (character)
+        {
+            case 1: lblCharacter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Migantron/idle/char-miganIdle-unscreen.gif")));                
+                break;
+            case 2: lblCharacter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/idle/char-brettIdle-unscreen.gif")));                
+                break;
+            case 3: lblCharacter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Gabe/idle/char-gabeIdle-unscreen.gif")));
+                break;
+            default:;
+        }
+    }
+    
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
         // TODO add your handling code here:
         pause=1;
@@ -335,41 +371,71 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         // TODO add your handling code here:
       
         Random rand=new Random();
+        int damage=rand.nextInt(100)+1;
+        if(enemy!=4){
+            stud.damage(500);
+        }else if(enemy==4){
+            kai.damage(500);
+        }
+        turns++;
+        orbs++;
+        skillsActive();
+        turncount=2;
+        enemyDamages();
+        
+        
+     
+    }//GEN-LAST:event_btnSkill1ActionPerformed
+
+    private void btnSkill2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill2ActionPerformed
+        // TODO add your handling code here:
+        Random rand=new Random();
         int damage=rand.nextInt(50)+1;
         if(enemy!=4){
             stud.damage(damage);
         }else if(enemy==4){
             kai.damage(damage);
         }
+        orbs-=3;
+        turns++;
         turncount=2;
         enemyDamages();
-        
-        
-        dialogue2.setText(""+enemy);
-    }//GEN-LAST:event_btnSkill1ActionPerformed
-
-    private void btnSkill2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill2ActionPerformed
-        // TODO add your handling code here:
-        turncount=2;
-        turn();
-        
+        btnSkill2.setEnabled(false);
+        skillsActive();
     }//GEN-LAST:event_btnSkill2ActionPerformed
 
     private void btnSkill3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill3ActionPerformed
         // TODO add your handling code here:
+        
+        player.addHP(100);
+        orbs-=4;
+        turns++;
         turncount=2;
-        turn();
+        enemyDamages();
+        btnSkill3.setEnabled(false);
+        skillsActive();
     }//GEN-LAST:event_btnSkill3ActionPerformed
 
     private void btnSkill4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill4ActionPerformed
         // TODO add your handling code here:
+         Random rand=new Random();
+        int damage=rand.nextInt(200)+1;
+        if(enemy!=4){
+            stud.damage(damage);
+        }else if(enemy==4){
+            kai.damage(damage);
+        }
+        orbs-=8;
+        turns++;
         turncount=2;
-        turn();
+        enemyDamages();
+        btnSkill4.setEnabled(false);
+        skillsActive();
     }//GEN-LAST:event_btnSkill4ActionPerformed
 
     private void pnlDialogueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDialogueMouseClicked
         // TODO add your handling code here:
-        storyDialogue(stDialogues());
+    
     }//GEN-LAST:event_pnlDialogueMouseClicked
 
     private void btnContinueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinueMouseClicked
@@ -379,9 +445,17 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
 
     private void btnFightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFightMouseClicked
         // TODO add your handling code here:
+        randomDialogue.setText("");
         pnlIntroduceEnemy.setVisible(false);
         setVisibleAllTrue();
     }//GEN-LAST:event_btnFightMouseClicked
+
+    private void btnSkipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSkipMouseClicked
+        // TODO add your handling code here:
+        skip=1;
+        pnlDialogue.setVisible(false);
+    }//GEN-LAST:event_btnSkipMouseClicked
+    
     
     int mili=0;
     int sec=0;
@@ -389,12 +463,20 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     int hour=0;
     int day=0;
     int pause=0;
-    
+    //int choice=2; // counter for na pick na character 1-marga 2-bert 3-geb
     int stDialogue=0;//Story Dialogue
     int enemy=1;//counter para mo change ang enemy icon og background tas dialogue probably
     int win=0;//to stop timer after winning;
+    int lose=0;
     int retry;// checker what type of retry check retry method
     int turncount=1;
+    int orbs=0;
+    int turns=0;
+    int flag=0;    
+    String pName="Derick";
+    
+    Connection con; //variable for databse connection
+    Statement st; //variable for the sql        
     Entity stud=new Mob(100);//mob damage increase per %5(tbd)
     Entity player=new Player(200);
     Entity kai=new Boss(500);
@@ -402,14 +484,99 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     int lblTextLength=0;
     Timer tm;
     int counter=0;
+    int skip=0;
     String fileName="src/Sounds/roblox.wav";
     BGMusic bgm=new BGMusic(1);
+   
+    public void flagChecker(){
+        if(win==1||lose==1){
+            flag=1;
+        }
+    }
     
-   public void dialogue(String txt){
+    public void skillsActive(){
+        if(orbs>=3){
+            btnSkill2.setEnabled(true);
+        }if(orbs>=4){
+            btnSkill3.setEnabled(true);
+        }if(orbs>=10){
+            btnSkill4.setEnabled(true);
+        }
+    }
+    
+    public void skillsInActive(){
+        
+            btnSkill2.setEnabled(false);
+      
+            btnSkill3.setEnabled(false);
+       
+            btnSkill4.setEnabled(false);
+        
+    }
+  public void IntroDialogues(){
+     // String line1,line2,line3,line4,line5,line6;
+      if(enemy==1){
+          setVisibleAllFalse();
+          pnlIntroduceEnemy.setVisible(true);
+          lblNameEnemy.setText("Migantron");
+          imgEnemy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Migantron/Idle/char-miganIdle-unscreen.gif")));
+          enemyIntro1.setText("Migantron's realm was a labyrinth of shadow and illusion,");
+          enemyIntro2.setText("Her eyes, twin orbs of gleaming obsidian, held the secrets of a thousand forgotten galaxies,");
+          enemyIntro3.setText("each glance a silent invitation to the abyss that lurked within her soul.  Her eyes, twin orbs of gleaming obsidian,");
+          enemyIntro4.setText("held the secrets of a thousand forgotten galaxies, each glance a silent invitation to the abyss that lurked within her soul. ");
+          enemyIntro5.setText("Her voice, a melodic whisper that echoed through the void, ");
+          enemyIntro6.setText("carried with it the promise of untold power and unimaginable darkness.");
+         
+          
+      }else if(enemy==2){
+          setVisibleAllFalse();
+          pnlIntroduceEnemy.setVisible(true);
+          lblNameEnemy.setText("Brett");
+          imgEnemy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/Idle/char-brettIdle-unscreen.gif")));
+          enemyIntro1.setText("Migantron's realm was a labyrinth of shadow and illusion,");
+          enemyIntro2.setText("Her eyes, twin orbs of gleaming obsidian, held the secrets of a thousand forgotten galaxies,");
+          enemyIntro3.setText("each glance a silent invitation to the abyss that lurked within her soul.  Her eyes, twin orbs of gleaming obsidian,");
+          enemyIntro4.setText("held the secrets of a thousand forgotten galaxies, each glance a silent invitation to the abyss that lurked within her soul. ");
+          enemyIntro5.setText("Her voice, a melodic whisper that echoed through the void, ");
+          enemyIntro6.setText("carried with it the promise of untold power and unimaginable darkness.");
+    
+          
+      }else if(enemy==3){
+          setVisibleAllFalse();
+          pnlIntroduceEnemy.setVisible(true);
+          lblNameEnemy.setText("Gabe");
+          imgEnemy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Gabe/Idle/char-gabeIdle-unscreen.gif")));
+          enemyIntro1.setText("Migantron's realm was a labyrinth of shadow and illusion,");
+          enemyIntro2.setText("Her eyes, twin orbs of gleaming obsidian, held the secrets of a thousand forgotten galaxies,");
+          enemyIntro3.setText("each glance a silent invitation to the abyss that lurked within her soul.  Her eyes, twin orbs of gleaming obsidian,");
+          enemyIntro4.setText("held the secrets of a thousand forgotten galaxies, each glance a silent invitation to the abyss that lurked within her soul. ");
+          enemyIntro5.setText("Her voice, a melodic whisper that echoed through the void, ");
+          enemyIntro6.setText("carried with it the promise of untold power and unimaginable darkness.");
+         
+      }else if(enemy==4){
+          setVisibleAllFalse();
+          pnlIntroduceEnemy.setVisible(true);
+          lblNameEnemy.setText("Khai");
+          imgEnemy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Sir Kai/Idle/char-skIdle-unscreen.gif")));
+          enemyIntro1.setText("Migantron's realm was a labyrinth of shadow and illusion,");
+          enemyIntro2.setText("Her eyes, twin orbs of gleaming obsidian, held the secrets of a thousand forgotten galaxies,");
+          enemyIntro3.setText("each glance a silent invitation to the abyss that lurked within her soul.  Her eyes, twin orbs of gleaming obsidian,");
+          enemyIntro4.setText("held the secrets of a thousand forgotten galaxies, each glance a silent invitation to the abyss that lurked within her soul. ");
+          enemyIntro5.setText("Her voice, a melodic whisper that echoed through the void, ");
+          enemyIntro6.setText("carried with it the promise of untold power and unimaginable darkness.");
+          
+      }if(enemy==objChoice.getChoice()){
+          SpecialIntro.setText("My Twin, My other Half, the one who have chosen the path of darkness");
+      }else{
+          SpecialIntro.setText("");
+      }
+  }
+    
+    public void dialogue(String txt){
        
           lblTextLength = txt.length();
       
-        tm=new Timer(80, new ActionListener(){
+        tm=new Timer(20, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0){
                 counter++;
@@ -418,6 +585,9 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
                     turncount=1;
                      tm.stop();
                      setVisible();
+                }else if(stud.getHP()<=0||kai.getHP()<=0){
+                    counter=0;
+                    tm.stop();
                 }
                 else{
                     randomDialogue.setText(txt.substring(0,counter));     
@@ -428,7 +598,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         
  }
     public void setVisibleAllFalse(){
-        lblplay.setVisible(false);
+        lblCharacter.setVisible(false);
         pgEnemy.setVisible(false);
         pgPlayer.setVisible(false);
         btnSkill1.setVisible(false);
@@ -440,11 +610,12 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         btnPause.setVisible(false);
         lblPlayer.setVisible(false);
         lblEnemy.setVisible(false);
-        
+          
+        pnlRandomDialogue.setVisible(false);
         pnlMenu.setVisible(false);
     }
     public void setVisibleAllTrue(){
-    lblplay.setVisible(true);
+    lblCharacter.setVisible(true);
         pgEnemy.setVisible(true);
         pgPlayer.setVisible(true);
         btnSkill1.setVisible(true);
@@ -456,27 +627,28 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         btnPause.setVisible(true);
         lblPlayer.setVisible(true);
         lblEnemy.setVisible(true);
+          pnlRandomDialogue.setVisible(true);
      
 }
     public String stDialogues(){
         String text="";
         if(stDialogue==0){
             text="In the vast expanse of the cosmos, where stars burned bright and nebulae painted the void with their ethereal hues,";
-        }else if(stDialogue==1){
+        }else if(stDialogue==1&&enemy==1){
             text="there roamed a solitary figure known only as the Galactic Wanderer.";
-        }else if(stDialogue==2){
+        }else if(stDialogue==2&&enemy==1){
             text="Their journey was not one of leisure, but of purpose";
-        }else if(stDialogue==3){
+        }else if(stDialogue==3&&enemy==1){
             text="driven by a quest to confront the greatest adversaries the galaxy had ever known.";
-        }else if(stDialogue==4){
+        }else if(stDialogue==4&&enemy==1){
             text="Four beings of immense power and malevolence had risen to dominance, casting shadows across the stars";
-        }else if(stDialogue==5){
+        }else if(stDialogue==5&&enemy==1){
             text="and threatening the balance of the cosmos.";
-        }else if(stDialogue==6){
+        }else if(stDialogue==6&&enemy==1){
             text="They were the Dark Lords, masters of chaos and destruction, each wielding powers beyond mortal comprehension.";
-        }else if (stDialogue==7){
+        }else if (stDialogue==7&&enemy==1){
             text="Would the Wanderer emerge victorious, shattering the shackles of darkness and restoring balance to the cosmos? ";
-        }else if(stDialogue==8){
+        }else if(stDialogue==8&&enemy==1){
             text="Or would they be consumed by the void, their noble quest ending in despair and defeat?";
         }
         return text;
@@ -491,10 +663,18 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
                 if(counter>lblTextLength){
                     stDialogue++;
                     counter=0;
-                     tm.stop(); 
+                     tm.stop();
+                  
                     if(stDialogue==9){
+                        stDialogue=0;
                         btnContinue.setVisible(true);
+                    }else{
+                        storyDialogue(stDialogues());
                     }
+                    
+                }else if(skip==1){
+                    counter=0;
+                    tm.stop();
                 }
                 else{
                     if(stDialogue==0){
@@ -574,58 +754,130 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         }
          
      }
+     public String toStringTime(){
+         return ""+day+":"+hour+":"+min+":"+sec+":"+mili;
+     }
+     
+     public int addAllTime(){
+         return (day*24)+(hour*60)+(min*60)+(sec*1000)+mili;
+     }
+     
+     
+     
+    
+     
+     public void addLeaderboard(){
+     
+         try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oopfinals", "root", "");
+           
+       
+           
+           Statement st = con.createStatement();
+           
+           String sql = "select * from leaderboard where Player='"+pName+"'";
+          
+           ResultSet rs = st.executeQuery(sql);
+           
+         if(rs.next()){
+             int val=rs.getInt("Time2");
+             if(val>addAllTime()){
+            updateRecord();
+             }
+           }else{
+               addRecord();
+               
+           }
+           con.close();
+      }catch(Exception e){
+          System.out.println(e.getMessage());
+      }
+     }
+     
+     public void addRecord(){
+         try {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oopfinals", "root", "");
+
+    String sql = "INSERT INTO `leaderboard`(`Player`, `Time`, `Time2`) "
+    + "VALUES ('" + pName + "','" + toStringTime() + "','" +  addAllTime() + "')";
+    st = con.createStatement();
+    st.execute(sql);
+    } catch (ClassNotFoundException | SQLException ex) {
+    Logger.getLogger(StoryMode.class.getName()).log(Level.SEVERE, null, ex);
+ }
+     }
+     
+  public void updateRecord(){
+     
+    try {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oopfinals", "root", "");
+    String sql = "UPDATE `leaderboard`SET Time='" + toStringTime() + "', Time2='" + addAllTime()+ "' WHERE Player='" + pName + "'";
+    st = con.createStatement();
+    st.execute(sql);
+    }catch (ClassNotFoundException | SQLException ex) {
+    Logger.getLogger(Leaderboards.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+     
     public void changeEnemy(){
         if(enemy==1){
-                    if(proceed==0){
-                    //System.out.println("I am your first enemy");
-                    //dialogue("I am your first enemyy");
-                    proceed=1;
-                    }
                     pgEnemy.setValue(stud.getHP());
                     gameWin();
-                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/enemy1.gif")));
+                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Migantron/Idle/char-miganIdle-unscreen.gif")));
+                    lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/miganbg.gif")));
                     pgPlayer.setValue(player.getHP());
                     
-                }else if(enemy==2){ 
-                   if(proceed==1){
-                       
-                      // dialogue("I am your second enemyy");
-                       proceed=2;
-                       
-                   }
-                  
-                   dialogue5.setText(""+proceed);
-                    //System.out.println("I am your second enemy");
+                }else if(enemy==2){             
                     pgEnemy.setValue(stud.getHP());
                     gameWin();
-                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/enemy2.gif")));
+                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/Idle/char-brettIdle-unscreen.gif")));
+                    lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/brettbg.gif")));
                     pgPlayer.setValue(player.getHP());
                     
                 }else if(enemy==3){
+                    
                     //System.out.println("I am your last enemy");
                     pgEnemy.setValue(stud.getHP());
                     gameWin();
-                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/enemy3.gif")));
+                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Gabe/Idle/char-gabeIdle-unscreen.gif")));
+                    lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/gabebg.gif")));
                     pgPlayer.setValue(player.getHP());
                 }else if(enemy==4){
                     pgEnemy.setValue(kai.getHP());
                     gameWin();
-                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/enemy4.gif")));
+                    enemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Sir Kai/Idle/char-skIdle-unscreen.gif")));
+                    lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/sirKhaibg.gif")));
                     pgPlayer.setValue(player.getHP());
                 }
     }
     public void gameWin(){
         if(stud.getHP()<=0&&enemy!=4){
-           enemy++;
-           stud.addHP(100);
-      
+            enemy++;
+            player.setHP(200);
+            stud.setHP(100);
+            stud.addDamage(30);
+            flagChecker();
+           IntroDialogues(); 
         }else if(player.getHP()<=0&&enemy!=4){
+            lose=1;
+            flagChecker();
+            
             JOptionPane.showMessageDialog(this, "YOU LOSE", "Good Game", JOptionPane.INFORMATION_MESSAGE);
+            new Menu().setVisible(true);
+            this.setVisible(false);
         }else if(kai.getHP()<=0){
             //Dialogue you finish the game
             //Add timer to database
-            JOptionPane.showMessageDialog(this, "YOU WIN", "Good Game", JOptionPane.INFORMATION_MESSAGE);
+            
             win=1;
+            flagChecker();
+            addLeaderboard();
+            JOptionPane.showMessageDialog(this, "YOU WIN", "Good Game", JOptionPane.INFORMATION_MESSAGE);
+            
+           
         }
     }
 
@@ -638,12 +890,15 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     }
     
     public void gamePlay(){
+        stud.setDamage(30);
+        kai.setDamage(60);
         Thread game=new Thread(){
+            @Override
             public void run(){
                 timer();
-            while(win==0){
+            while(flag==0){
                 changeEnemy();
-            
+                
             }}
         };
         game.start();
@@ -652,8 +907,9 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     public void timer(){
         Thread time=new Thread(){
            public void run(){
-               while(win==0){
+               while(flag==0){
                    if(pause==0){
+                       
                      try{
                        sleep(1);
                        mili++;
@@ -690,13 +946,16 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     public  void turn(){
         if(turncount==2){
             setVisible();
+            if(turns%5==0){
+               stud.addDamage(10);
+            }
             Random rand=new Random();
-            int damage=rand.nextInt(10)+1;
+            int damage=rand.nextInt(stud.getDamage())+1;
             player.damage(damage);
             String text=randomDialogue();
             dialogue(text);
-            
-            
+           
+            EnemyChecker.setText(""+orbs);
             setVisible();
             
         }
@@ -706,9 +965,10 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         pnlMenu.setVisible(false);
         Thread time=new Thread(){
            public void run(){
-               while(win==0){
+               while(flag==0){
                    if(pause==0){
-                     try{
+                     
+                       try{
                        sleep(1);
                        mili++;
                        mili++;
@@ -776,6 +1036,8 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel EnemyChecker;
+    private javax.swing.JLabel SpecialIntro;
     private javax.swing.JLabel btnContinue;
     private javax.swing.JLabel btnFight;
     private javax.swing.JButton btnPause;
@@ -783,6 +1045,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     private javax.swing.JButton btnSkill2;
     private javax.swing.JButton btnSkill3;
     private javax.swing.JButton btnSkill4;
+    private javax.swing.JLabel btnSkip;
     private javax.swing.JButton btnUnpause;
     private javax.swing.JLabel checker;
     private javax.swing.JLabel checker1;
@@ -803,18 +1066,18 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     private javax.swing.JLabel enemyIntro5;
     private javax.swing.JLabel enemyIntro6;
     private javax.swing.JLabel imgEnemy;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblCharacter;
     private javax.swing.JLabel lblEnemy;
     private javax.swing.JLabel lblNameEnemy;
     private javax.swing.JLabel lblPlayer;
     private javax.swing.JLabel lblTime;
-    private javax.swing.JLabel lblplay;
     private javax.swing.JProgressBar pgEnemy;
     private javax.swing.JProgressBar pgPlayer;
     private javax.swing.JPanel pnlDialogue;
     private javax.swing.JPanel pnlIntroduceEnemy;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPanel pnlRandomDialogue;
     private javax.swing.JLabel randomDialogue;
     // End of variables declaration//GEN-END:variables
 }

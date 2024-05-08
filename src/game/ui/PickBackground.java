@@ -8,6 +8,7 @@ import game.gameLogic.pvp;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import game.characters.Character;
 
 /**
  *
@@ -18,13 +19,18 @@ public class PickBackground extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    int character1,character2, background=1;
+    Character objChar1 = new Character();
+    Character objChar2 = new Character();
+    int background=1;
     public PickBackground(){
         initComponents();
     }
     
     public PickBackground(int character1, int character2) {
-        initComponents();     
+        initComponents();
+        
+        objChar1.setChoice(character1);
+        objChar2.setChoice(character2);
   
         try{
             File fontStyle = new File("src/fonts/8-bit-hud.ttf");
@@ -162,7 +168,7 @@ public class PickBackground extends javax.swing.JFrame {
 
     private void btnStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartMouseClicked
         // TODO add your handling code here:
-        new pvp(character1,character2, background).setVisible(true);
+        new pvp(objChar1.getChoice(),objChar2.getChoice(), background).setVisible(true);
         this.dispose();
          
     }//GEN-LAST:event_btnStartMouseClicked
@@ -170,13 +176,11 @@ public class PickBackground extends javax.swing.JFrame {
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new CharacterPicking().setVisible(true);
+        new PVPCharacterPicking().setVisible(true);
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void btnLeftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLeftMouseClicked
-        // TODO add your handling code here:
-        System.out.println(background);        
-        
+        // TODO add your handling code here:    
         if (background == 1)
         {
             background = 4;
@@ -210,9 +214,6 @@ public class PickBackground extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLeftMouseExited
 
     private void btnRightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRightMouseClicked
-        // TODO add your handling code here:
-        System.out.println(background);
-        
         if (background == 4)
         {
             background = 1;
@@ -222,7 +223,6 @@ public class PickBackground extends javax.swing.JFrame {
             background++;
         }
         
-        System.out.println(background+" ");
         switch (background)
         {
             case 1: pickbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/pickBrettbg.gif")));

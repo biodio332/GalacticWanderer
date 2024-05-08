@@ -5,6 +5,7 @@
 package game;
 import Sounds.BGMusic;
 import game.Player;
+import game.gameLogic.StoryMode;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,7 +40,9 @@ public class Leaderboards extends javax.swing.JFrame {
         initComponents();
         fetch();
         bgm.playBackgroundAudio(filepath);
+       // tblLeaderboard.getColumnModel().getColumn(2).setMaxWidth(0);
     }
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +55,7 @@ public class Leaderboards extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLeaderboard = new javax.swing.JTable();
+        jTest = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
@@ -61,17 +65,17 @@ public class Leaderboards extends javax.swing.JFrame {
 
         tblLeaderboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name", "Time"
+                "Name", "Time(days,hours,minutes,seconds,milisecond)", "Time2"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,9 +91,14 @@ public class Leaderboards extends javax.swing.JFrame {
         if (tblLeaderboard.getColumnModel().getColumnCount() > 0) {
             tblLeaderboard.getColumnModel().getColumn(0).setResizable(false);
             tblLeaderboard.getColumnModel().getColumn(1).setResizable(false);
+            tblLeaderboard.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 180, 600, -1));
+
+        jTest.setForeground(new java.awt.Color(255, 255, 255));
+        jTest.setText("jLabel1");
+        getContentPane().add(jTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +108,7 @@ public class Leaderboards extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 660, -1, -1));
 
+        lblBackground.setForeground(new java.awt.Color(255, 255, 255));
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/GWTitleScreen.gif"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
 
@@ -116,9 +126,15 @@ public class Leaderboards extends javax.swing.JFrame {
         new Menu().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+
 Connection con; //variable for databse connection
 Statement st; //variable for the sql
 ArrayList<Player> player = new ArrayList<>(); //arraylist for the table
+
+String name;
+String time;
+int time2;
    private void fetch() {
  
  DefaultTableModel model1 = (DefaultTableModel) tblLeaderboard.getModel();
@@ -126,11 +142,11 @@ ArrayList<Player> player = new ArrayList<>(); //arraylist for the table
  try {
  Class.forName("com.mysql.cj.jdbc.Driver");
  con = DriverManager.getConnection("jdbc:mysql://localhost:3306/oopfinals", "root", ""); //localhost port, databasename, username, password
- String sql = "select * from leaderboard";
+ String sql = "select * from leaderboard order by Time2";
  st = con.createStatement();
  ResultSet rs = st.executeQuery(sql);
  while (rs.next()) {
- Player user = new Player(rs.getString("Player"), rs.getString("Time")); 
+ Player user = new Player(rs.getString("Player"), rs.getString("Time"),rs.getString("Time2")); 
  player.add(user);
  }
  DefaultTableModel model2 = (DefaultTableModel) tblLeaderboard.getModel();
@@ -138,13 +154,15 @@ ArrayList<Player> player = new ArrayList<>(); //arraylist for the table
  Object[] row = new Object[4];
  row[0] = user.getName();
  row[1] = user.getTime();
- 
+ row[2] = user.getTime2();
  model2.addRow(row);
  }
  } catch (ClassNotFoundException | SQLException ex) {
  Logger.getLogger(Leaderboards.class.getName()).log(Level.SEVERE, null, ex);
  }
  }
+   
+   
    String filepath="src/Sounds/background1.wav";
     BGMusic bgm=new BGMusic(1);
 
@@ -189,6 +207,7 @@ ArrayList<Player> player = new ArrayList<>(); //arraylist for the table
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jTest;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JTable tblLeaderboard;
     // End of variables declaration//GEN-END:variables

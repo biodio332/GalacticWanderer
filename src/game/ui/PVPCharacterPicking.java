@@ -5,6 +5,7 @@
 package game.ui;
 
 import game.gameLogic.pvp;
+import game.characters.Character;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -15,16 +16,15 @@ import java.io.File;
  *
  * @author Wein
  */
-public class CharacterPicking extends javax.swing.JFrame {
+public class PVPCharacterPicking extends javax.swing.JFrame {
 
     /**
      * Creates new form CharacterPicking
      */
-    
-    int character1=0;
-    int character2=0;
+    Character objChar1 = new Character();
+    Character objChar2 = new Character();
     int confirm=0;
-    public CharacterPicking() {
+    public PVPCharacterPicking() {
         initComponents();
         this.setResizable(false);
         
@@ -57,7 +57,7 @@ public class CharacterPicking extends javax.swing.JFrame {
             confirm++;
             if(confirm==2){
                     //pvp characters = new pvp(character1, character2);
-                    new PickBackground(character1,character2).setVisible(true);
+                    new PickBackground(objChar1.getChoice(),objChar2.getChoice()).setVisible(true);
                     setVisible(false);
                 }            
             }            
@@ -67,7 +67,7 @@ public class CharacterPicking extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (confirm==0) {                    
-                    CharacterPicking.this.dispose();
+                    PVPCharacterPicking.this.dispose();
                     new PickGamemode().setVisible(true);
                 } else if (confirm==1){
                     confirm--;
@@ -375,19 +375,19 @@ public class CharacterPicking extends javax.swing.JFrame {
     }//GEN-LAST:event_lblChar4MouseExited
 
     private void lblConfirmMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConfirmMouseEntered
-
+        lblConfirm.setForeground(Color.YELLOW);
     }//GEN-LAST:event_lblConfirmMouseEntered
 
     private void lblConfirmMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConfirmMouseExited
-
+        lblConfirm.setForeground(Color.WHITE);
     }//GEN-LAST:event_lblConfirmMouseExited
 
     private void lblBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseEntered
-
+        lblBack.setForeground(Color.YELLOW);
     }//GEN-LAST:event_lblBackMouseEntered
 
     private void lblBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseExited
-
+        lblBack.setForeground(Color.WHITE);
     }//GEN-LAST:event_lblBackMouseExited
 
     private void brettMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brettMouseEntered
@@ -435,13 +435,13 @@ public class CharacterPicking extends javax.swing.JFrame {
 
     private void JPSKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPSKMouseClicked
         if(confirm==0){
-            character1=4;
+            objChar1.setChoice(4);
             lblChar4.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);
         }else if(confirm==1){
-            character2=4;
+            objChar2.setChoice(4);
             lblChar4.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
@@ -461,13 +461,13 @@ public class CharacterPicking extends javax.swing.JFrame {
 
     private void JPMiganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPMiganMouseClicked
         if(confirm==0){
-            character1=3;
+            objChar1.setChoice(3);
             lblChar3.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
             lblChar4.setEnabled(true);
         }else if(confirm==1){
-            character2=3;
+            objChar2.setChoice(3);
             lblChar3.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
@@ -487,13 +487,13 @@ public class CharacterPicking extends javax.swing.JFrame {
 
     private void JPGabeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPGabeMouseClicked
         if(confirm==0){
-            character1=2;
+            objChar1.setChoice(2);
             lblChar2.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar3.setEnabled(true);
             lblChar4.setEnabled(true);
         }else if(confirm==1){
-            character2=2;
+            objChar2.setChoice(2);
             lblChar2.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar3.setEnabled(true);
@@ -513,13 +513,13 @@ public class CharacterPicking extends javax.swing.JFrame {
 
     private void JPBrettMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPBrettMouseClicked
         if(confirm==0){
-            character1=1;
+            objChar1.setChoice(1);
             lblChar1.setEnabled(false);
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);
             lblChar4.setEnabled(true);
         }else if(confirm==1){
-            character2=1;
+            objChar2.setChoice(1);
             lblChar1.setEnabled(false);
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);
@@ -544,20 +544,21 @@ public class CharacterPicking extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PVPCharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PVPCharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PVPCharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PVPCharacterPicking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CharacterPicking().setVisible(true);
+                new PVPCharacterPicking().setVisible(true);
             }
         });
     }

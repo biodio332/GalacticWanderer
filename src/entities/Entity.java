@@ -11,6 +11,7 @@ package entities;
 public class Entity {
     int hp;
     int type;
+    int damage;
     public Entity(int hp){
         this.hp=hp;
     }
@@ -25,8 +26,20 @@ public class Entity {
     public int getHP(){
         return hp;
     }
+    public void setHP(int hp){
+        this.hp=hp;
+    }
     public void addHP(int hp){
-        this.hp+=hp;
+        this.hp=hp;
+    }
+    public int getDamage(){
+        return damage;
+    }
+    public void setDamage(int damage){
+        this.damage=damage;
+    }
+    public void addDamage(int damage){
+        this.damage+=damage;
     }
     public void damage(int damage){
         this.hp-=damage;

@@ -62,7 +62,7 @@ public class PickGamemode extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 PickGamemode.this.dispose();
-                new CharacterPicking().setVisible(true);
+                new PVPCharacterPicking().setVisible(true);
             }
         });         
         
@@ -88,14 +88,14 @@ public class PickGamemode extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        PVPbg = new javax.swing.JLabel();
         JPPvp = new javax.swing.JPanel();
+        PVPbg = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        SMbg = new javax.swing.JLabel();
         JPStory = new javax.swing.JPanel();
-        lblTitleScreen = new javax.swing.JLabel();
+        SMbg = new javax.swing.JLabel();
         lblStorymode = new javax.swing.JLabel();
         lblPvp = new javax.swing.JLabel();
+        lblTitleScreen = new javax.swing.JLabel();
         lblExit = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
@@ -105,22 +105,39 @@ public class PickGamemode extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PVPbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/pvpScreenSmol.gif"))); // NOI18N
-        jPanel2.add(PVPbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 330));
-
+        JPPvp.setOpaque(false);
         JPPvp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JPPvpMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JPPvpMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JPPvpMouseExited(evt);
+            }
         });
+
+        javax.swing.GroupLayout JPPvpLayout = new javax.swing.GroupLayout(JPPvp);
+        JPPvp.setLayout(JPPvpLayout);
+        JPPvpLayout.setHorizontalGroup(
+            JPPvpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        JPPvpLayout.setVerticalGroup(
+            JPPvpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         jPanel2.add(JPPvp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 420));
+        JPPvp.getAccessibleContext().setAccessibleParent(lblBackground);
+
+        PVPbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/pvpScreenSmol.gif"))); // NOI18N
+        jPanel2.add(PVPbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 330));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, 400, 350));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        SMbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/SMbg.gif"))); // NOI18N
-        jPanel1.add(SMbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 330));
 
         JPStory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JPStory.setOpaque(false);
@@ -128,16 +145,32 @@ public class PickGamemode extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JPStoryMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JPStoryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JPStoryMouseExited(evt);
+            }
         });
+
+        javax.swing.GroupLayout JPStoryLayout = new javax.swing.GroupLayout(JPStory);
+        JPStory.setLayout(JPStoryLayout);
+        JPStoryLayout.setHorizontalGroup(
+            JPStoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        JPStoryLayout.setVerticalGroup(
+            JPStoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+
         jPanel1.add(JPStory, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 420));
+
+        SMbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/SMbg.gif"))); // NOI18N
+        jPanel1.add(SMbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 330));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 400, 350));
         jPanel1.getAccessibleContext().setAccessibleName("");
-
-        lblTitleScreen.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblTitleScreen.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitleScreen.setText("Galactic Wanderers");
-        getContentPane().add(lblTitleScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
         lblStorymode.setForeground(new java.awt.Color(255, 255, 255));
         lblStorymode.setText("Story Mode");
@@ -146,6 +179,11 @@ public class PickGamemode extends javax.swing.JFrame {
         lblPvp.setForeground(new java.awt.Color(255, 255, 255));
         lblPvp.setText("PVP");
         getContentPane().add(lblPvp, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 530, -1, -1));
+
+        lblTitleScreen.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTitleScreen.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitleScreen.setText("Galactic Wanderers");
+        getContentPane().add(lblTitleScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setText("Back");
@@ -173,12 +211,12 @@ public class PickGamemode extends javax.swing.JFrame {
 
     private void JPPvpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPPvpMouseClicked
         PickGamemode.this.dispose();
-        new CharacterPicking().setVisible(true);
+        new PVPCharacterPicking().setVisible(true);
     }//GEN-LAST:event_JPPvpMouseClicked
 
     private void JPStoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPStoryMouseClicked
         PickGamemode.this.dispose();
-        new StoryMode().setVisible(true);
+        new SMCharacterPicking().setVisible(true);
     }//GEN-LAST:event_JPStoryMouseClicked
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
@@ -192,6 +230,22 @@ public class PickGamemode extends javax.swing.JFrame {
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
         lblExit.setForeground(Color.WHITE);
     }//GEN-LAST:event_lblExitMouseExited
+
+    private void JPPvpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPPvpMouseEntered
+        lblPvp.setForeground(Color.YELLOW);
+    }//GEN-LAST:event_JPPvpMouseEntered
+
+    private void JPPvpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPPvpMouseExited
+        lblPvp.setForeground(Color.WHITE);
+    }//GEN-LAST:event_JPPvpMouseExited
+
+    private void JPStoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPStoryMouseEntered
+        lblStorymode.setForeground(Color.YELLOW);
+    }//GEN-LAST:event_JPStoryMouseEntered
+
+    private void JPStoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPStoryMouseExited
+        lblStorymode.setForeground(Color.WHITE);
+    }//GEN-LAST:event_JPStoryMouseExited
     public void background(){
             String filepath="src/Sounds/background2.wav";
 
