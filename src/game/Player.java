@@ -9,13 +9,13 @@ package game;
  * @author Wein
  */
 public class Player {
-    String name,time;
+    String name,time,time2;
     
  //Constructor
-    public Player(String name,String time){
+    public Player(String name,String time,String time2){
     this.name = name;
     this.time = time;
-
+    this.time2= time2;
  }
 
  //getters
@@ -24,6 +24,9 @@ public class Player {
  }
  public String getTime(){
  return this.time;
+ }
+  public String getTime2(){
+ return this.time2;
  }
 
 }
