@@ -53,6 +53,10 @@ public class Login extends javax.swing.JFrame {
             Font txtFont = font.deriveFont(12f);
             txtUsername.setFont(txtFont);
             pwdPassword.setFont(txtFont);
+            lblUsername.setFont(txtFont);
+            lblPassword.setFont(txtFont);
+            
+            
         
             
         } catch (Exception e)
@@ -168,6 +172,8 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JLabel();
@@ -181,6 +187,14 @@ public class Login extends javax.swing.JFrame {
         setIconImages(null);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblUsername.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsername.setText("Username");
+        getContentPane().add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
+
+        lblPassword.setForeground(new java.awt.Color(255, 255, 255));
+        lblPassword.setText("Password");
+        getContentPane().add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, -1, -1));
 
         lblLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -230,7 +244,6 @@ public class Login extends javax.swing.JFrame {
         lblBackground.setForeground(new java.awt.Color(153, 255, 255));
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/GWTitleScreen.gif"))); // NOI18N
         lblBackground.setAlignmentY(0.0F);
-        lblBackground.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
@@ -295,6 +308,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel btnRegister;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField pwdPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

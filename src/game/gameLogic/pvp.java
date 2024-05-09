@@ -149,6 +149,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlWin.setBackground(new java.awt.Color(0, 0, 0));
         pnlWin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCharPicking.setText("Character Picking");
@@ -618,37 +619,55 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }
     
     public void checkOrbs(int character, int orbs)
+{
+    switch (character)
     {
-        switch (character)
-        {
-            case 1: 
-                if (orbs >= 2)
-                {
-                    jpchar1Skill2.setEnabled(true);
-                } else if (orbs >= 4)
-                {
-                    jpchar1Skill3.setEnabled(true);
-                } else if (orbs >= 6)
-                {
-                    jpchar1Skill4.setEnabled(true);
-                }
-                break;
-            case 2: 
-                if (orbs >= 2)
-                {
-                    jpchar2Skill2.setEnabled(true);
-                } else if (orbs >= 4)
-                {
-                    jpchar2Skill3.setEnabled(true);
-                } else if (orbs >= 6)
-                {
-                    jpchar2Skill4.setEnabled(true);
-                }
-                break;
-            default:;
+        case 1 -> { 
+            if (orbs >= 2)
+            {
+                jpchar1Skill2.setEnabled(true);
+            } else {
+                jpchar1Skill2.setEnabled(false);
+            }
+            if (orbs >= 4)
+            {
+                jpchar1Skill3.setEnabled(true);
+            } else {
+                jpchar1Skill3.setEnabled(false);
+            }
+            if (orbs >= 6)
+            {
+                jpchar1Skill4.setEnabled(true);
+            } else {
+                jpchar1Skill4.setEnabled(false);
+            }
+            }
+        case 2 -> { 
+            if (orbs >= 2)
+            {
+                jpchar2Skill2.setEnabled(true);
+            } else {
+                jpchar2Skill2.setEnabled(false);
+            }
+            if (orbs >= 4)
+            {
+                jpchar2Skill3.setEnabled(true);
+            } else {
+                jpchar2Skill3.setEnabled(false);
+            }
+            if (orbs >= 6)
+            {
+                jpchar2Skill4.setEnabled(true);
+            } else {
+                jpchar2Skill4.setEnabled(false);
+            }
+            }
+        default -> {
+            }
         }        
     }
     
+    @SuppressWarnings("empty-statement")
     public void skills(int choice, int skill, int turncount)
     {
         Random rand=new Random();
@@ -656,241 +675,259 @@ public class pvp extends javax.swing.JFrame implements GameState {
         
         if (turncount == 1)
         {
-            if (choice == 1)
-            {
-                switch (skill)
-                {
-                    case 1 : 
+            switch (choice) {
+                case 1 -> {
+                    switch (skill)
+                    {
+                        case 1 -> {
                             dmg=10;
                             player2hp-=dmg;
                             player1Orbs++;
-                            break;
-                    case 2 : 
+                        }
+                        case 2 -> {
                             dmg=rand.nextInt(10,15)+1;
                             player2hp-=dmg;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(20, 35)+1;
-                        player1hp+=randomHeal;
-                        if (player1hp > 100)
-                        {
-                            player1hp=100;
                         }
-                        pgPlayer1.setValue(player1hp);
-                        break;
-                    case 4 :
-                        int heal=70;
-                        player1hp+=heal;
-                        if (player1hp > 100)
-                        {
-                            player1hp=100;
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(20, 35)+1;
+                            player1hp+=randomHeal;
+                            if (player1hp > 100)
+                            {
+                                player1hp=100;
+                            }
+                            pgPlayer1.setValue(player1hp);
                         }
-                        pgPlayer1.setValue(player1hp);
-                        break;                        
-                    default:;          
-                }            
-            } else if (choice == 2)
-            {
-                switch (skill)
-                {
-                    case 1 : 
+                        case 4 -> {
+                            int heal=70; 
+                            player1hp+=heal;
+                            if (player1hp > 100)
+                            {
+                                player1hp=100;
+                            }
+                            pgPlayer1.setValue(player1hp);
+                        }
+                        default -> {
+                            ;
+                        }
+                    }
+                }
+                case 2 -> {
+                    switch (skill)
+                    {
+                        case 1 -> {
                             dmg=10;
                             player2hp-=dmg;
                             player1Orbs++;
-                            break;
-                    case 2 : 
+                    }
+                        case 2 -> { 
                             dmg=rand.nextInt(10,15)+1;
                             player2hp-=dmg;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(10, 15)+1;
-                        player1hp+=randomHeal;
-                        if (player1hp > 100)
-                        {
+                    }
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(10, 15)+1;
+                            player1hp+=randomHeal;
+                        if (player1hp > 100) {
                             player1hp=100;
                         }
                         //pgPlayer1.setValue(player1hp);
-                        break;
-                    case 4 :
-                        dmg=50;
-                        player2hp-=dmg;                        
-                        break;                        
-                    default:;          
+                    }
+                        case 4 -> {
+                            dmg=50;
+                            player2hp-=dmg;
+                    }
+                        default -> {
+                            ;
+                    }
+                    }
                 }
-            } else if (choice == 3)
-            {
-                switch (skill)
-                {
-                    case 1 : 
+                case 3 -> {
+                    switch (skill)
+                    {
+                        case 1 -> { 
                             dmg=10;
                             player2hp-=dmg;
                             player1Orbs++;
-                            break;
-                    case 2 : 
-                            player1Orbs++;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(20, 35)+1;
-                        player1hp+=randomHeal;
-                        if (player1hp > 100)
-                        {
-                            player1hp=100;
-                        }
-                        pgPlayer1.setValue(player1hp);
-                        break;
-                    case 4 :
-                        dmg=30;
-                        player2hp-=dmg;  
-                        break;                        
-                    default:;          
+                    }
+                        case 2 -> player1Orbs++;
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(20, 35)+1;
+                            player1hp+=randomHeal;
+                            if (player1hp > 100)
+                            {
+                                player1hp=100;
+                            }
+                            pgPlayer1.setValue(player1hp);
+                    }
+                        case 4 -> {
+                            dmg=30;
+                            player2hp-=dmg;
+                    }
+                        default -> {
+                            ;
+                    }
+                    }
                 }
-            } else if (choice == 4)
-            {
-                switch (skill)
-                {
-                    case 1 : 
+                case 4 -> {
+                    switch (skill)
+                    {
+                        case 1 -> { 
                             dmg=10;
                             player2hp-=dmg;
                             player1Orbs++;
-                            break;
-                    case 2 : 
+                    }
+                        case 2 -> { 
                             dmg=rand.nextInt(10,15)+1;
                             player2hp-=dmg;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(20, 35)+1;
-                        player1hp+=randomHeal;
-                        if (player1hp > 100)
-                        {
-                            player1hp=100;
-                        }
-                        pgPlayer1.setValue(player1hp);
-                        break;
-                    case 4 :
-                        dmg=40;
-                        player2hp-=dmg; 
-                        break;                        
-                    default:;          
+                    }
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(20, 35)+1;
+                            player1hp+=randomHeal;
+                            if (player1hp > 100)
+                            {
+                                player1hp=100;
+                            }
+                            pgPlayer1.setValue(player1hp);
+                    }
+                        case 4 -> {
+                            dmg=40;
+                            player2hp-=dmg;
+                    }
+                        default -> {
+                            ;
+                    }
+                    }
                 }
-            }            
+                default -> {
+                }
+            }
         } 
         else if (turncount == 2)
         {
-            if (choice == 1)
-            {
-                switch (skill)
-                {
-                    case 1 : 
+            switch (choice) {
+                case 1 -> {
+                    switch (skill)
+                    {
+                        case 1 -> { 
                             dmg=10;
                             player1hp-=dmg;
                             player2Orbs++;
-                            break;
-                    case 2 : 
+                        }
+                        case 2 -> { 
                             dmg=rand.nextInt(10,15)+1;
                             player1hp-=dmg;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(20, 35)+1;
-                        player2hp+=randomHeal;
-                        if (player2hp > 100)
-                        {
-                            player2hp=100;
                         }
-                        pgPlayer2.setValue(player2hp);
-                        break;
-                    case 4 :
-                        int heal=70;
-                        player2hp+=heal;
-                        if (player2hp > 100)
-                        {
-                            player2hp=100;
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(20, 35)+1;
+                            player2hp+=randomHeal;
+                            if (player2hp > 100)
+                            {
+                                player2hp=100;
+                            }
+                            pgPlayer2.setValue(player2hp);
                         }
-                        pgPlayer2.setValue(player2hp);
-                        break;                        
-                    default:;          
-                }            
-            } else if (choice == 2)
-            {
-                switch (skill)
-                {
-                    case 1 : 
-                            dmg=10;
-                            player1hp-=dmg;
-                            player2Orbs++;
-                            break;
-                    case 2 : 
-                            dmg=rand.nextInt(10,15)+1;
-                            player1hp-=dmg;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(10, 15)+1;
-                        player1hp+=randomHeal;
-                        if (player2hp > 100)
-                        {
-                            player2hp=100;
+                        case 4 -> {
+                            int heal=70;
+                            player2hp+=heal;
+                            if (player2hp > 100)
+                            {
+                                player2hp=100;
+                            }
+                            pgPlayer2.setValue(player2hp);
                         }
-                        //pgPlayer1.setValue(player1hp);
-                        break;
-                    case 4 :
-                        dmg=50;
-                        player1hp-=dmg;                        
-                        break;                        
-                    default:;          
+                        default -> {
+                            ;
+                        }
+                    }
                 }
-            } else if (choice == 3)
-            {
-                switch (skill)
-                {
-                    case 1 : 
+
+                case 2 -> {
+                    switch (skill)
+                    {
+                        case 1 -> { 
                             dmg=10;
                             player1hp-=dmg;
                             player2Orbs++;
-                            break;
-                    case 2 : 
-                            player2Orbs++;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(20, 35)+1;
-                        player2hp+=randomHeal;
-                        if (player2hp > 100)
-                        {
-                            player2hp=100;
                         }
-                        pgPlayer2.setValue(player2hp);
-                        break;
-                    case 4 :
-                        dmg=30;
-                        player1hp-=dmg;  
-                        break;                        
-                    default:;          
-                }
-            } else if (choice == 4)
-            {
-                switch (skill)
-                {
-                    case 1 : 
-                            dmg=10;
-                            player1hp-=dmg;
-                            player2Orbs++;
-                            break;
-                    case 2 : 
+                        case 2 -> { 
                             dmg=rand.nextInt(10,15)+1;
                             player1hp-=dmg;
-                            break;
-                    case 3 : 
-                        int randomHeal=rand.nextInt(20, 35)+1;
-                        player2hp+=randomHeal;
-                        if (player2hp > 100)
-                        {
-                            player2hp=100;
                         }
-                        pgPlayer2.setValue(player2hp);
-                        break;
-                    case 4 :
-                        dmg=40;
-                        player1hp-=dmg; 
-                        break;                        
-                    default:;          
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(10, 15)+1;
+                            player1hp+=randomHeal;
+                            if (player2hp > 100) {
+                                player2hp=100;
+                            }
+                            //pgPlayer1.setValue(player1hp);
+                        }
+                        case 4 -> {
+                            dmg=50;
+                            player1hp-=dmg;
+                        }
+                        default -> {
+                            ;
+                        }
+                    }
+                }
+
+                case 3 -> {
+                    switch (skill)
+                    {
+                        case 1 -> { 
+                            dmg=10;
+                            player1hp-=dmg;
+                            player2Orbs++;
+                    }
+                        case 2 -> player2Orbs++;
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(20, 35)+1;
+                            player2hp+=randomHeal;
+                            if (player2hp > 100)
+                            {
+                                player2hp=100;
+                            }
+                            pgPlayer2.setValue(player2hp);
+                    }
+                        case 4 -> {
+                            dmg=30;
+                            player1hp-=dmg;
+                    }
+                        default -> {
+                            ;
+                    }
+                    }
+                }
+                case 4 -> {
+                    switch (skill)
+                    {
+                        case 1 -> { 
+                            dmg=10;
+                            player1hp-=dmg;
+                            player2Orbs++;
+                    }
+                        case 2 -> { 
+                            dmg=rand.nextInt(10,15)+1;
+                            player1hp-=dmg;
+                    }
+                        case 3 -> {
+                            int randomHeal=rand.nextInt(20, 35)+1;
+                            player2hp+=randomHeal;
+                            if (player2hp > 100)
+                            {
+                                player2hp=100;
+                            }
+                            pgPlayer2.setValue(player2hp);
+                    }
+                        case 4 -> {
+                            dmg=40;
+                            player1hp-=dmg;
+                    }
+                        default -> {
+                            ;
+                    }
+                    }
+                }
+                default -> {
                 }
             }
         }        
@@ -899,9 +936,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
     
     
     private void jpchar1Skill1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar1Skill1MouseClicked
-        /*Random rand=new Random();
-        int dmg=rand.nextInt(10,15)+1;
-        player2hp-=dmg;*/
+
         skill=1;
         skills(choice1, skill, turncount);
         turncount=2;
@@ -924,25 +959,34 @@ public class pvp extends javax.swing.JFrame implements GameState {
     
     
     private void jpchar1Skill2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar1Skill2MouseClicked
-        jpchar1Skill2.setEnabled(false);
-        checkOrbs(choice1, player1Orbs);     
         skill=2;
         skills(choice1, skill, turncount);
         player1Orbs-=2;
+
+        if(player1Orbs < 0) {
+            player1Orbs = 0;
+        }
+
+        checkOrbs(choice1, player1Orbs);
+
         lblOrbs1.setText("Orbs "+ player1Orbs);  
         turncount=2;
         turn();
         whenDamage();
         playerHp();
-        
     }//GEN-LAST:event_jpchar1Skill2MouseClicked
 
     private void jpchar1Skill3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar1Skill3MouseClicked
-        jpchar1Skill2.setEnabled(false);        
-        checkOrbs(choice1, player1Orbs);
         skill=3;
         skills(choice1, skill, turncount);
         player1Orbs-=4;
+
+        if(player1Orbs < 0) {
+            player1Orbs = 0;
+        }
+
+        checkOrbs(choice1, player1Orbs);
+
         lblOrbs1.setText("Orbs "+ player1Orbs);  
         turncount=2;
         turn();
@@ -951,10 +995,16 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }//GEN-LAST:event_jpchar1Skill3MouseClicked
 
     private void jpchar1Skill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar1Skill4MouseClicked
-        jpchar1Skill2.setEnabled(false);
         skill=4;
         skills(choice1, skill, turncount);
         player1Orbs-=6;
+
+        if(player1Orbs < 0) {
+            player1Orbs = 0;
+        }
+
+        checkOrbs(choice1, player1Orbs);
+
         lblOrbs1.setText("Orbs "+ player1Orbs);  
         turncount=2;
         turn();
@@ -963,39 +1013,57 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }//GEN-LAST:event_jpchar1Skill4MouseClicked
 
     private void jpchar2Skill2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar2Skill2MouseClicked
-        jpchar1Skill2.setEnabled(false);
         skill=2;
         skills(choice2, skill, turncount);
         player2Orbs-=2;
+
+        if(player2Orbs < 0) {
+            player2Orbs = 0;
+        }
+
+        checkOrbs(choice2, player2Orbs);
+
         lblOrbs2.setText("Orbs "+ player2Orbs);  
         turncount=1;
         turn();
         whenDamage();
-        playerHp(); 
+        playerHp();
     }//GEN-LAST:event_jpchar2Skill2MouseClicked
 
     private void jpchar2Skill3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar2Skill3MouseClicked
-        jpchar1Skill2.setEnabled(false);
         skill=3;
         skills(choice2, skill, turncount);
         player2Orbs-=4;
-        lblOrbs2.setText("Orbs "+ player2Orbs);          
-        turncount=1;
-        turn();
-        whenDamage();
-        playerHp(); 
-    }//GEN-LAST:event_jpchar2Skill3MouseClicked
 
-    private void jpchar2Skill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar2Skill4MouseClicked
-        jpchar1Skill2.setEnabled(false);
-        skill=4;
-        skills(choice2, skill, turncount);
-        player2Orbs-=6;
+        if(player2Orbs < 0) {
+            player2Orbs = 0;
+        }
+
+        checkOrbs(choice2, player2Orbs);
+
         lblOrbs2.setText("Orbs "+ player2Orbs);  
         turncount=1;
         turn();
         whenDamage();
-        playerHp(); 
+        playerHp();
+    }//GEN-LAST:event_jpchar2Skill3MouseClicked
+
+    private void jpchar2Skill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar2Skill4MouseClicked
+        skill=4;
+        skills(choice2, skill, turncount);
+        player2Orbs-=6;
+
+        if(player2Orbs < 0) {
+            player2Orbs = 0;
+        }
+
+        checkOrbs(choice2, player2Orbs);
+
+        lblOrbs2.setText("Orbs "+ player2Orbs);  
+        turncount=1;
+        turn();
+        whenDamage();
+        playerHp();
     }//GEN-LAST:event_jpchar2Skill4MouseClicked
 
     /**

@@ -64,6 +64,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
             Font timerFont = font.deriveFont(14f);
             lblTime.setFont(timerFont);
             btnSkip.setFont(timerFont);
+            lblOrbs.setFont(timerFont);
 
             Font nameFont = font.deriveFont(12f);
             lblPlayer.setFont(nameFont);
@@ -91,6 +92,15 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
             enemyIntro5.setFont(dialogueFont);
             enemyIntro6.setFont(dialogueFont);
             SpecialIntro.setFont(dialogueFont);
+            btnPause.setFont(dialogueFont);
+            btnMenu.setFont(dialogueFont);
+            btnCharacterPicking.setFont(dialogueFont);
+            btnRetry.setFont(dialogueFont);
+            Retry.setFont(dialogueFont);
+            menu.setFont(dialogueFont);
+            btnUnpause.setFont(dialogueFont);
+            
+            
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -138,7 +148,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         btnCharacterPicking = new javax.swing.JButton();
         pnlMenu = new javax.swing.JPanel();
         btnUnpause = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        menu = new javax.swing.JButton();
         Retry = new javax.swing.JButton();
         pgEnemy = new javax.swing.JProgressBar();
         pgPlayer = new javax.swing.JProgressBar();
@@ -146,16 +156,12 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         enemy1 = new javax.swing.JLabel();
         jpSkill1 = new javax.swing.JPanel();
         pskill1 = new javax.swing.JLabel();
-        btnSkill1 = new javax.swing.JButton();
         jpSkill2 = new javax.swing.JPanel();
         pskill2 = new javax.swing.JLabel();
-        btnSkill5 = new javax.swing.JButton();
         jpSkill3 = new javax.swing.JPanel();
         pskill3 = new javax.swing.JLabel();
-        btnSkill6 = new javax.swing.JButton();
         jpSkill4 = new javax.swing.JPanel();
         pskill4 = new javax.swing.JLabel();
-        btnSkill7 = new javax.swing.JButton();
         lblTime = new javax.swing.JLabel();
         btnPause = new javax.swing.JButton();
         lblPlayer = new javax.swing.JLabel();
@@ -228,7 +234,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
 
         lblNameEnemy.setForeground(new java.awt.Color(255, 255, 255));
         lblNameEnemy.setToolTipText("");
-        pnlIntroduceEnemy.add(lblNameEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, -1, 20));
+        pnlIntroduceEnemy.add(lblNameEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, -1, 20));
 
         enemyIntro1.setForeground(new java.awt.Color(255, 255, 255));
         pnlIntroduceEnemy.add(enemyIntro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 10));
@@ -266,34 +272,39 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
 
         getContentPane().add(pnlIntroduceEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 1280, 370));
 
+        pnlWin.setBackground(new java.awt.Color(0, 0, 0));
         pnlWin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnRetry.setText("Retry");
+        btnRetry.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 204, 255)));
         btnRetry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetryActionPerformed(evt);
             }
         });
-        pnlWin.add(btnRetry, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
+        pnlWin.add(btnRetry, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 30));
 
         btnMenu.setText("Menu");
+        btnMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 204, 255)));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
             }
         });
-        pnlWin.add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, 20));
+        pnlWin.add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 150, 30));
 
         btnCharacterPicking.setText("Character Picking");
+        btnCharacterPicking.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 204, 255)));
         btnCharacterPicking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCharacterPickingActionPerformed(evt);
             }
         });
-        pnlWin.add(btnCharacterPicking, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+        pnlWin.add(btnCharacterPicking, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 200, 30));
 
-        getContentPane().add(pnlWin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 380, 360));
+        getContentPane().add(pnlWin, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 380, 360));
 
+        pnlMenu.setBackground(new java.awt.Color(0, 0, 0));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnUnpause.setText("Unpause");
@@ -302,15 +313,15 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
                 btnUnpauseActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnUnpause, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 149, -1, -1));
+        pnlMenu.add(btnUnpause, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
 
-        jButton1.setText("Menu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        menu.setText("Menu");
+        menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                menuActionPerformed(evt);
             }
         });
-        pnlMenu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
+        pnlMenu.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
 
         Retry.setText("Retry");
         Retry.addActionListener(new java.awt.event.ActionListener() {
@@ -320,8 +331,12 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         });
         pnlMenu.add(Retry, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
-        getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 320, 330));
+        getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 320, 330));
+
+        pgEnemy.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 0), 1, true));
         getContentPane().add(pgEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 430, 30));
+
+        pgPlayer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 0), 1, true));
         getContentPane().add(pgPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 430, 30));
 
         lblCharacter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/idle/char-brettIdle-unscreen.gif"))); // NOI18N
@@ -339,59 +354,27 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         jpSkill1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpSkill1.add(pskill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
 
-        btnSkill1.setText("Skill1");
-        btnSkill1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkill1ActionPerformed(evt);
-            }
-        });
-        jpSkill1.add(btnSkill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
-
-        getContentPane().add(jpSkill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 100, 110));
+        getContentPane().add(jpSkill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 100, 80));
         jpSkill1.getAccessibleContext().setAccessibleDescription("");
 
         jpSkill2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpSkill2.add(pskill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
 
-        btnSkill5.setText("Skill1");
-        btnSkill5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkill5ActionPerformed(evt);
-            }
-        });
-        jpSkill2.add(btnSkill5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
-
-        getContentPane().add(jpSkill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 100, 110));
+        getContentPane().add(jpSkill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 100, 80));
 
         jpSkill3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpSkill3.add(pskill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
 
-        btnSkill6.setText("Skill1");
-        btnSkill6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkill6ActionPerformed(evt);
-            }
-        });
-        jpSkill3.add(btnSkill6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
-
-        getContentPane().add(jpSkill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 100, 110));
+        getContentPane().add(jpSkill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 100, 80));
 
         jpSkill4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jpSkill4.add(pskill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
 
-        btnSkill7.setText("Skill1");
-        btnSkill7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSkill7ActionPerformed(evt);
-            }
-        });
-        jpSkill4.add(btnSkill7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
-
-        getContentPane().add(jpSkill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 100, 110));
+        getContentPane().add(jpSkill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 100, 80));
 
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setText("30");
-        getContentPane().add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 60, 270, 20));
+        getContentPane().add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 270, 20));
 
         btnPause.setText("Pause");
         btnPause.addActionListener(new java.awt.event.ActionListener() {
@@ -410,8 +393,11 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         lblEnemy.setText("EnemyName");
         lblEnemy.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         getContentPane().add(lblEnemy, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 50, 256, 20));
-        getContentPane().add(lblOrbs, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 100, 20));
 
+        lblOrbs.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(lblOrbs, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 100, 20));
+
+        pnlRandomDialogue.setBackground(new java.awt.Color(0, 0, 0));
         pnlRandomDialogue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnlRandomDialogue.add(randomDialogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 590, 60));
 
@@ -451,32 +437,13 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         pause=1;
         pause();
     }//GEN-LAST:event_btnPauseActionPerformed
-
+    
+    
     private void btnUnpauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnpauseActionPerformed
         // TODO add your handling code here:
         pause=0;
         unPause();
     }//GEN-LAST:event_btnUnpauseActionPerformed
-
-    private void btnSkill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill1ActionPerformed
-        // TODO add your handling code here:
-      
-        Random rand=new Random();
-        int damage=rand.nextInt(100)+1;
-        if(enemy!=4){
-            stud.damage(500);
-        }else if(enemy==4){
-            kai.damage(500);
-        }
-        turns++;
-        orbs++;
-        skillsActive();
-        turncount=2;
-        enemyDamages();
-        
-        
-     
-    }//GEN-LAST:event_btnSkill1ActionPerformed
 
     private void pnlDialogueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDialogueMouseClicked
         // TODO add your handling code here:
@@ -522,18 +489,6 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void btnSkill5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSkill5ActionPerformed
-
-    private void btnSkill6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSkill6ActionPerformed
-
-    private void btnSkill7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSkill7ActionPerformed
-
     private void jpSkill1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpSkill1MouseClicked
        Random rand=new Random();
         int damage=rand.nextInt(100)+1;
@@ -556,11 +511,11 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
          
     }//GEN-LAST:event_RetryActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new Menu(ch).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_menuActionPerformed
     String ch;
     int geb=0,marg=0,bert=0;
     int character;
@@ -1078,7 +1033,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
             String text=randomDialogue();
             dialogue(text);
            
-            lblOrbs.setText(""+orbs);
+            lblOrbs.setText("Orbs"+orbs);
             setVisible();
             
         }
@@ -1167,10 +1122,6 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnPause;
     private javax.swing.JButton btnRetry;
-    private javax.swing.JButton btnSkill1;
-    private javax.swing.JButton btnSkill5;
-    private javax.swing.JButton btnSkill6;
-    private javax.swing.JButton btnSkill7;
     private javax.swing.JLabel btnSkip;
     private javax.swing.JButton btnUnpause;
     private javax.swing.JLabel dialogue;
@@ -1190,7 +1141,6 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     private javax.swing.JLabel enemyIntro5;
     private javax.swing.JLabel enemyIntro6;
     private javax.swing.JLabel imgEnemy;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jpSkill1;
     private javax.swing.JPanel jpSkill2;
     private javax.swing.JPanel jpSkill3;
@@ -1202,6 +1152,7 @@ public class StoryMode extends javax.swing.JFrame implements GameState {
     private javax.swing.JLabel lblOrbs;
     private javax.swing.JLabel lblPlayer;
     private javax.swing.JLabel lblTime;
+    private javax.swing.JButton menu;
     private javax.swing.JProgressBar pgEnemy;
     private javax.swing.JProgressBar pgPlayer;
     private javax.swing.JPanel pnlDialogue;
