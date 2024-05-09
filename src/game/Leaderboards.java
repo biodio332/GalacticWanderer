@@ -6,6 +6,9 @@ package game;
 import Sounds.BGMusic;
 import game.Player;
 import game.gameLogic.StoryMode;
+import java.awt.Color;
+import java.awt.Font;
+import java.io.File;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
 
@@ -42,6 +46,25 @@ public class Leaderboards extends javax.swing.JFrame {
     public Leaderboards(String ch){
         this.ch=ch;
         initComponents();
+        try{
+            File fontStyle = new File("src/fonts/8-bit-hud.ttf");
+            Font font = Font.createFont(Font.TRUETYPE_FONT,fontStyle);
+            JTableHeader Theader=tblLeaderboard.getTableHeader();
+            Font titleFont = font.deriveFont(10f);
+            Font text=font.deriveFont(8F);
+            Theader.setForeground(Color.black);
+            Theader.setFont(titleFont);
+            tblLeaderboard.setFont(text);
+            tblLeaderboard.setBackground(Color.black);
+            tblLeaderboard.setForeground(Color.white);
+            tblLeaderboard.getColumnModel().getColumn(2).setMinWidth(0);
+            tblLeaderboard.getColumnModel().getColumn(2).setMaxWidth(0);
+        
+            
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         fetch();
         bgm.playBackgroundAudio(filepath);
        // tblLeaderboard.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -67,6 +90,7 @@ public class Leaderboards extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1280, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblLeaderboard.setBackground(new java.awt.Color(0, 0, 0));
         tblLeaderboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -98,7 +122,7 @@ public class Leaderboards extends javax.swing.JFrame {
             tblLeaderboard.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 180, 600, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 180, 1060, -1));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {

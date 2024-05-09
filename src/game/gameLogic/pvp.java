@@ -468,10 +468,10 @@ public class pvp extends javax.swing.JFrame implements GameState {
         jpchar1Skill3.setVisible(false);
         jpchar1Skill4.setVisible(false);
         
-        jpchar1Skill1.setVisible(true);
-        jpchar1Skill2.setVisible(true);
-        jpchar1Skill3.setVisible(true);
-        jpchar1Skill4.setVisible(true);
+        jpchar2Skill1.setVisible(false);
+        jpchar2Skill2.setVisible(false);
+        jpchar2Skill3.setVisible(false);
+        jpchar2Skill4.setVisible(false);
     }
     
     public void setFalse(){
@@ -569,11 +569,14 @@ public class pvp extends javax.swing.JFrame implements GameState {
           btnPause.setVisible(true);
         btnUnpause.setVisible(false);
         if(turncount==1){
+        setVisibleFalse();
         jpchar1Skill1.setVisible(true);
         jpchar1Skill2.setVisible(true);
         jpchar1Skill3.setVisible(true);
         jpchar1Skill4.setVisible(true);
+        
         }else{
+        setVisibleFalse();
         jpchar2Skill1.setVisible(true);
         jpchar2Skill2.setVisible(true);
         jpchar2Skill3.setVisible(true);
@@ -616,6 +619,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
         // TODO add your handling code here:     
                 pause=1;  
                 pause();
+                setVisibleFalse();
     }//GEN-LAST:event_btnPauseActionPerformed
 
     private void btnUnpauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnpauseActionPerformed
