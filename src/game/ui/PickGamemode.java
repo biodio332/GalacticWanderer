@@ -67,7 +67,7 @@ public class PickGamemode extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 PickGamemode.this.dispose();
-                new PVPCharacterPicking().setVisible(true);
+                new PVPCharacterPicking(ch).setVisible(true);
             }
         });         
         
@@ -75,7 +75,7 @@ public class PickGamemode extends javax.swing.JFrame {
         lblExit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new Menu().setVisible(true);
+                new Menu(ch).setVisible(true);
                 PickGamemode.this.dispose();                
             }
         });

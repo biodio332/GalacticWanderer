@@ -87,8 +87,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
     int checker=1;
     int player1hp=100;
     int player2hp=100;
-    Character player1=new Character();
-    Character player2=new Character();
+
     int turncount=0;
     int counter=31;
     int counter2=1000;
@@ -113,14 +112,32 @@ public class pvp extends javax.swing.JFrame implements GameState {
         pgPlayer1 = new javax.swing.JProgressBar();
         p2Name = new javax.swing.JLabel();
         lblPlayer2 = new javax.swing.JLabel();
+        jpchar1Skill1 = new javax.swing.JPanel();
+        Skill1p1 = new javax.swing.JLabel();
+        btnSkill1 = new javax.swing.JButton();
+        jpchar1Skill2 = new javax.swing.JPanel();
+        Skill2p1 = new javax.swing.JLabel();
+        btnSkill5 = new javax.swing.JButton();
+        jpchar1Skill3 = new javax.swing.JPanel();
+        Skill3p1 = new javax.swing.JLabel();
+        btnSkill6 = new javax.swing.JButton();
+        jpchar1Skill4 = new javax.swing.JPanel();
+        Skill4p1 = new javax.swing.JLabel();
+        btnSkill7 = new javax.swing.JButton();
+        jpchar2Skill1 = new javax.swing.JPanel();
+        Skill1p2 = new javax.swing.JLabel();
+        btnSkill2 = new javax.swing.JButton();
+        jpchar2Skill2 = new javax.swing.JPanel();
+        Skill2p2 = new javax.swing.JLabel();
+        btnSkill8 = new javax.swing.JButton();
+        jpchar2Skill3 = new javax.swing.JPanel();
+        Skill3p2 = new javax.swing.JLabel();
+        btnSkill9 = new javax.swing.JButton();
+        jpchar2Skill4 = new javax.swing.JPanel();
+        Skill4p2 = new javax.swing.JLabel();
+        btnSkill10 = new javax.swing.JButton();
         btnskill1 = new javax.swing.JButton();
-        btnskill2 = new javax.swing.JButton();
-        btnskill3 = new javax.swing.JButton();
-        btnskill4 = new javax.swing.JButton();
         btn2skill1 = new javax.swing.JButton();
-        btn2skill2 = new javax.swing.JButton();
-        btn2skill3 = new javax.swing.JButton();
-        btn2skill4 = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -178,7 +195,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
         getContentPane().add(btnPause, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 63, -1));
 
         lblPlayer1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/idle/char-brettIdle-unscreen.gif"))); // NOI18N
-        getContentPane().add(lblPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 225, 225));
+        getContentPane().add(lblPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 225, 225));
 
         pgPlayer2.setBackground(new java.awt.Color(255, 255, 255));
         pgPlayer2.setForeground(new java.awt.Color(255, 51, 51));
@@ -202,7 +219,121 @@ public class pvp extends javax.swing.JFrame implements GameState {
         getContentPane().add(p2Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 256, -1));
 
         lblPlayer2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Gabe/Idle/char-gabeIdle-unscreen.gif"))); // NOI18N
-        getContentPane().add(lblPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 280, 225, 225));
+        getContentPane().add(lblPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 230, 225, 225));
+
+        jpchar1Skill1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpchar1Skill1MouseClicked(evt);
+            }
+        });
+        jpchar1Skill1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar1Skill1.add(Skill1p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill1.setText("Skill1");
+        btnSkill1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill1ActionPerformed(evt);
+            }
+        });
+        jpchar1Skill1.add(btnSkill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar1Skill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 100, 110));
+
+        jpchar1Skill2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar1Skill2.add(Skill2p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill5.setText("Skill1");
+        btnSkill5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill5ActionPerformed(evt);
+            }
+        });
+        jpchar1Skill2.add(btnSkill5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar1Skill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 100, 110));
+
+        jpchar1Skill3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar1Skill3.add(Skill3p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill6.setText("Skill1");
+        btnSkill6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill6ActionPerformed(evt);
+            }
+        });
+        jpchar1Skill3.add(btnSkill6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar1Skill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, 100, 110));
+
+        jpchar1Skill4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar1Skill4.add(Skill4p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill7.setText("Skill1");
+        btnSkill7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill7ActionPerformed(evt);
+            }
+        });
+        jpchar1Skill4.add(btnSkill7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar1Skill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 100, 110));
+
+        jpchar2Skill1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpchar2Skill1MouseClicked(evt);
+            }
+        });
+        jpchar2Skill1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar2Skill1.add(Skill1p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill2.setText("Skill1");
+        btnSkill2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill2ActionPerformed(evt);
+            }
+        });
+        jpchar2Skill1.add(btnSkill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar2Skill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 500, 100, 110));
+
+        jpchar2Skill2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar2Skill2.add(Skill2p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill8.setText("Skill1");
+        btnSkill8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill8ActionPerformed(evt);
+            }
+        });
+        jpchar2Skill2.add(btnSkill8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar2Skill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 500, 100, 110));
+
+        jpchar2Skill3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar2Skill3.add(Skill3p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill9.setText("Skill1");
+        btnSkill9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill9ActionPerformed(evt);
+            }
+        });
+        jpchar2Skill3.add(btnSkill9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar2Skill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 500, 100, 110));
+
+        jpchar2Skill4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpchar2Skill4.add(Skill4p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        btnSkill10.setText("Skill1");
+        btnSkill10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkill10ActionPerformed(evt);
+            }
+        });
+        jpchar2Skill4.add(btnSkill10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        getContentPane().add(jpchar2Skill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 500, 100, 110));
 
         btnskill1.setText("Skill 1");
         btnskill1.addActionListener(new java.awt.event.ActionListener() {
@@ -210,16 +341,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
                 btnskill1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnskill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
-
-        btnskill2.setText("Skill 2");
-        getContentPane().add(btnskill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, -1, -1));
-
-        btnskill3.setText("Skill 3");
-        getContentPane().add(btnskill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, -1, -1));
-
-        btnskill4.setText("Skill 4");
-        getContentPane().add(btnskill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, -1, -1));
+        getContentPane().add(btnskill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, -1, -1));
 
         btn2skill1.setText("Skill 1");
         btn2skill1.setToolTipText("");
@@ -228,16 +350,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
                 btn2skill1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn2skill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 560, -1, -1));
-
-        btn2skill2.setText("Skill 2");
-        getContentPane().add(btn2skill2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, -1, -1));
-
-        btn2skill3.setText("Skill 3");
-        getContentPane().add(btn2skill3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 560, -1, -1));
-
-        btn2skill4.setText("Skill 4");
-        getContentPane().add(btn2skill4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 560, -1, -1));
+        getContentPane().add(btn2skill1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 640, -1, -1));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/pvpScreen.gif"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 710));
@@ -263,7 +376,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
     public void initBackground(int background) {
         switch (background)
         {
-            case 1: lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/brettbg.gif")));
+            case 1: lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/brettbg.gif")));              
                 break;
             case 2: lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background/gabebg.gif")));
                 break;
@@ -279,6 +392,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
         switch (choice1)
         {
             case 1: lblPlayer1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/idle/char-brettIdle-unscreen.gif")));
+                    
                 break;
             case 2: lblPlayer1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Gabe/idle/char-gabeIdle-unscreen.gif")));
                 break;
@@ -288,7 +402,14 @@ public class pvp extends javax.swing.JFrame implements GameState {
                 break;
             default:;
         }
-        
+        Skill1p1.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar1.getSkill1())));
+        Skill2p1.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar1.getSkill2())));
+        Skill3p1.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar1.getSkill3())));
+        Skill4p1.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar1.getSkill4())));
+        Skill1p2.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar2.getSkill1())));
+        Skill2p2.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar2.getSkill2())));
+        Skill3p2.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar2.getSkill3())));
+        Skill4p2.setIcon(new javax.swing.ImageIcon(getClass().getResource(objChar2.getSkill4()))); 
         switch (choice2)
         {
             case 1: lblPlayer2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Brett/idle/char-brettIdle-mir-unscreen.gif")));
@@ -301,6 +422,7 @@ public class pvp extends javax.swing.JFrame implements GameState {
                 break;
             default:;
         }
+        
     }
     
     public void characterDamage(){
@@ -313,27 +435,27 @@ public class pvp extends javax.swing.JFrame implements GameState {
     @Override
     public void turn(){
         if(turncount==1){
-            btnskill1.setVisible(true);
-            btnskill2.setVisible(true);
-            btnskill3.setVisible(true);
-            btnskill4.setVisible(true);
+            jpchar1Skill1.setVisible(true);
+            jpchar1Skill2.setVisible(true);
+            jpchar1Skill3.setVisible(true);
+            jpchar1Skill4.setVisible(true);
       
-            btn2skill1.setVisible(false);
-            btn2skill2.setVisible(false);
-            btn2skill3.setVisible(false);
-            btn2skill4.setVisible(false);
+            jpchar2Skill1.setVisible(false);
+            jpchar2Skill2.setVisible(false);
+            jpchar2Skill3.setVisible(false);
+            jpchar2Skill4.setVisible(false);
             counter=31;
         
         } else if(turncount==2){
-            btnskill1.setVisible(false);
-            btnskill2.setVisible(false);
-            btnskill3.setVisible(false);
-            btnskill4.setVisible(false);
+            jpchar1Skill1.setVisible(false);
+            jpchar1Skill2.setVisible(false);
+            jpchar1Skill3.setVisible(false);
+            jpchar1Skill4.setVisible(false);
             
-            btn2skill1.setVisible(true);
-            btn2skill2.setVisible(true);
-            btn2skill3.setVisible(true);
-            btn2skill4.setVisible(true);
+            jpchar2Skill1.setVisible(true);
+            jpchar2Skill2.setVisible(true);
+            jpchar2Skill3.setVisible(true);
+            jpchar2Skill4.setVisible(true);
             counter=31;
         }
     }
@@ -341,15 +463,15 @@ public class pvp extends javax.swing.JFrame implements GameState {
     public void setVisibleFalse() {
         btnPause.setVisible(false);
         
-        btnskill1.setVisible(false);
-        btnskill2.setVisible(false);
-        btnskill3.setVisible(false);
-        btnskill4.setVisible(false);
+        jpchar1Skill1.setVisible(false);
+        jpchar1Skill2.setVisible(false);
+        jpchar1Skill3.setVisible(false);
+        jpchar1Skill4.setVisible(false);
         
-        btn2skill1.setVisible(false);
-        btn2skill2.setVisible(false);
-        btn2skill3.setVisible(false);
-        btn2skill4.setVisible(false);
+        jpchar1Skill1.setVisible(true);
+        jpchar1Skill2.setVisible(true);
+        jpchar1Skill3.setVisible(true);
+        jpchar1Skill4.setVisible(true);
     }
     
     public void setFalse(){
@@ -410,11 +532,10 @@ public class pvp extends javax.swing.JFrame implements GameState {
                         }
                        }
                        
-                       }
+                      }
                        
                    }
-                   
-                   
+                    
                }
            }
        };
@@ -448,15 +569,15 @@ public class pvp extends javax.swing.JFrame implements GameState {
           btnPause.setVisible(true);
         btnUnpause.setVisible(false);
         if(turncount==1){
-        btnskill1.setVisible(true);
-        btnskill2.setVisible(true);
-        btnskill3.setVisible(true);
-        btnskill4.setVisible(true);
+        jpchar1Skill1.setVisible(true);
+        jpchar1Skill2.setVisible(true);
+        jpchar1Skill3.setVisible(true);
+        jpchar1Skill4.setVisible(true);
         }else{
-        btn2skill1.setVisible(true);
-        btn2skill2.setVisible(true);
-        btn2skill3.setVisible(true);
-        btn2skill4.setVisible(true);
+        jpchar2Skill1.setVisible(true);
+        jpchar2Skill2.setVisible(true);
+        jpchar2Skill3.setVisible(true);
+        jpchar2Skill4.setVisible(true);
      }
     }
      
@@ -497,18 +618,6 @@ public class pvp extends javax.swing.JFrame implements GameState {
                 pause();
     }//GEN-LAST:event_btnPauseActionPerformed
 
-    private void btnskill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnskill1ActionPerformed
-        // TODO add your handling code here:
-        Random rand=new Random();
-        int dmg=rand.nextInt(100)+1;
-        player2hp-=dmg;
-        turncount=2;
-        turn();
-         whenDamage();
-        playerHp();
-      
-    }//GEN-LAST:event_btnskill1ActionPerformed
-
     private void btnUnpauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnpauseActionPerformed
         // TODO add your handling code here:
         pause=0;
@@ -548,6 +657,83 @@ public class pvp extends javax.swing.JFrame implements GameState {
         this.dispose();
     }//GEN-LAST:event_btnCharPickingActionPerformed
 
+    private void btnSkill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill1ActionPerformed
+        // TODO add your handling code here:
+
+        /*Random rand=new Random();
+        int damage=rand.nextInt(100)+1;
+        if(enemy!=4){
+            stud.damage(500);
+        }else if(enemy==4){
+            kai.damage(500);
+        }
+        turns++;
+        orbs++;
+        skillsActive();
+        turncount=2;
+        enemyDamages();*/
+
+    }//GEN-LAST:event_btnSkill1ActionPerformed
+
+    private void jpchar1Skill1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar1Skill1MouseClicked
+        /*Random rand=new Random();
+        int damage=rand.nextInt(100)+1;
+        if(enemy!=4){
+            stud.damage(500);
+        }else if(enemy==4){
+            kai.damage(500);
+        }
+        turns++;
+        orbs++;
+        skillsActive();
+        turncount=2;
+        enemyDamages();*/
+    }//GEN-LAST:event_jpchar1Skill1MouseClicked
+
+    private void btnSkill5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill5ActionPerformed
+
+    private void btnSkill6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill6ActionPerformed
+
+    private void btnSkill7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill7ActionPerformed
+
+    private void btnskill1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnskill1ActionPerformed
+        // TODO add your handling code here:
+        Random rand=new Random();
+        int dmg=rand.nextInt(100)+1;
+        player2hp-=dmg;
+        turncount=2;
+        turn();
+        whenDamage();
+        playerHp();
+
+    }//GEN-LAST:event_btnskill1ActionPerformed
+
+    private void btnSkill2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill2ActionPerformed
+
+    private void jpchar2Skill1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpchar2Skill1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpchar2Skill1MouseClicked
+
+    private void btnSkill8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill8ActionPerformed
+
+    private void btnSkill9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill9ActionPerformed
+
+    private void btnSkill10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkill10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkill10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -585,19 +771,37 @@ public class pvp extends javax.swing.JFrame implements GameState {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Skill1p1;
+    private javax.swing.JLabel Skill1p2;
+    private javax.swing.JLabel Skill2p1;
+    private javax.swing.JLabel Skill2p2;
+    private javax.swing.JLabel Skill3p1;
+    private javax.swing.JLabel Skill3p2;
+    private javax.swing.JLabel Skill4p1;
+    private javax.swing.JLabel Skill4p2;
     private javax.swing.JButton btn2skill1;
-    private javax.swing.JButton btn2skill2;
-    private javax.swing.JButton btn2skill3;
-    private javax.swing.JButton btn2skill4;
     private javax.swing.JButton btnCharPicking;
     private javax.swing.JButton btnPause;
     private javax.swing.JButton btnRematch;
     private javax.swing.JButton btnReturn;
+    private javax.swing.JButton btnSkill1;
+    private javax.swing.JButton btnSkill10;
+    private javax.swing.JButton btnSkill2;
+    private javax.swing.JButton btnSkill5;
+    private javax.swing.JButton btnSkill6;
+    private javax.swing.JButton btnSkill7;
+    private javax.swing.JButton btnSkill8;
+    private javax.swing.JButton btnSkill9;
     private javax.swing.JButton btnUnpause;
     private javax.swing.JButton btnskill1;
-    private javax.swing.JButton btnskill2;
-    private javax.swing.JButton btnskill3;
-    private javax.swing.JButton btnskill4;
+    private javax.swing.JPanel jpchar1Skill1;
+    private javax.swing.JPanel jpchar1Skill2;
+    private javax.swing.JPanel jpchar1Skill3;
+    private javax.swing.JPanel jpchar1Skill4;
+    private javax.swing.JPanel jpchar2Skill1;
+    private javax.swing.JPanel jpchar2Skill2;
+    private javax.swing.JPanel jpchar2Skill3;
+    private javax.swing.JPanel jpchar2Skill4;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblPlayer2;

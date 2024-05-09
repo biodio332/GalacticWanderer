@@ -178,7 +178,7 @@ public class PickBackground extends javax.swing.JFrame {
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new PVPCharacterPicking().setVisible(true);
+        new PVPCharacterPicking(ch).setVisible(true);
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void btnLeftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLeftMouseClicked

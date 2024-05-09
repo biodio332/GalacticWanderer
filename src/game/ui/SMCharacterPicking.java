@@ -22,7 +22,7 @@ public class SMCharacterPicking extends javax.swing.JFrame {
     /**
      * Creates new form CharacterPicking
      */
-    Character objChar = new Character();
+    int char1;//character
     int confirm=0;
     String character;
     public SMCharacterPicking(){
@@ -57,7 +57,7 @@ public class SMCharacterPicking extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SMCharacterPicking.this.dispose();
-                new StoryMode(objChar.getChoice(),character).setVisible(true);                       
+                new StoryMode(char1,character).setVisible(true);                       
             }            
         });
         
@@ -65,7 +65,7 @@ public class SMCharacterPicking extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SMCharacterPicking.this.dispose();
-                new PickGamemode().setVisible(true);
+                new PickGamemode(character).setVisible(true);
             }
         });
     }    
@@ -359,7 +359,7 @@ public class SMCharacterPicking extends javax.swing.JFrame {
 
     private void JPMiganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPMiganMouseClicked
         if(confirm==0){
-            objChar.setChoice(1);
+            char1=3;
             lblChar3.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
@@ -378,7 +378,7 @@ public class SMCharacterPicking extends javax.swing.JFrame {
 
     private void JPGabeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPGabeMouseClicked
         if(confirm==0){
-            objChar.setChoice(3);
+            char1=2;
             lblChar2.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar3.setEnabled(true);
@@ -397,7 +397,7 @@ public class SMCharacterPicking extends javax.swing.JFrame {
 
     private void JPBrettMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPBrettMouseClicked
         if(confirm==0){
-            objChar.setChoice(2);
+            char1=1;
             lblChar1.setEnabled(false);
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);

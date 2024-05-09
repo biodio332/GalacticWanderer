@@ -59,7 +59,6 @@ public class Leaderboards extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLeaderboard = new javax.swing.JTable();
-        jTest = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
@@ -100,10 +99,6 @@ public class Leaderboards extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 180, 600, -1));
-
-        jTest.setForeground(new java.awt.Color(255, 255, 255));
-        jTest.setText("jLabel1");
-        getContentPane().add(jTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +207,6 @@ int time2;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel jTest;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JTable tblLeaderboard;
     // End of variables declaration//GEN-END:variables

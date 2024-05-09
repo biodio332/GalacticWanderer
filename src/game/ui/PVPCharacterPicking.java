@@ -21,16 +21,16 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
     /**
      * Creates new form CharacterPicking
      */
-    Character objChar1 = new Character();
-    Character objChar2 = new Character();
+    int char1;
+    int char2;
     int confirm=0;
     String ch;
     public PVPCharacterPicking() {}
     
-    public PVPCharacterPicking(String ch){
+    public PVPCharacterPicking(String chr){
         initComponents();
         this.setResizable(false);
-        this.ch=ch;
+        this.ch=chr;
         try{
             File fontStyle = new File("src/fonts/8-bit-hud.ttf");
             Font font = Font.createFont(Font.TRUETYPE_FONT,fontStyle);
@@ -60,7 +60,7 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
             confirm++;
             if(confirm==2){
                     //pvp characters = new pvp(character1, character2);
-                    new PickBackground(objChar1.getChoice(),objChar2.getChoice(),ch).setVisible(true);
+                    new PickBackground(char1,char2,ch).setVisible(true);
                     setVisible(false);
                 }            
             }            
@@ -71,7 +71,7 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (confirm==0) {                    
                     PVPCharacterPicking.this.dispose();
-                    new PickGamemode().setVisible(true);
+                    new PickGamemode(ch).setVisible(true);
                 } else if (confirm==1){
                     confirm--;
                     lblPlayer.setText("Player 1");
@@ -439,13 +439,14 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
 
     private void JPSKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPSKMouseClicked
         if(confirm==0){
-            objChar1.setChoice(4);
+            char1=4;
+            char2=4;
             lblChar4.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);
         }else if(confirm==1){
-            objChar2.setChoice(4);
+            char2=4;
             lblChar4.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
@@ -465,13 +466,14 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
 
     private void JPMiganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPMiganMouseClicked
         if(confirm==0){
-            objChar1.setChoice(3);
+            char1=3;
+            char2=3;
             lblChar3.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
             lblChar4.setEnabled(true);
         }else if(confirm==1){
-            objChar2.setChoice(3);
+            char2=3;
             lblChar3.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar2.setEnabled(true);
@@ -491,13 +493,14 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
 
     private void JPGabeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPGabeMouseClicked
         if(confirm==0){
-            objChar1.setChoice(2);
+            char1=2;
+            char2=2;
             lblChar2.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar3.setEnabled(true);
             lblChar4.setEnabled(true);
         }else if(confirm==1){
-            objChar2.setChoice(2);
+            char2=2;
             lblChar2.setEnabled(false);
             lblChar1.setEnabled(true);       
             lblChar3.setEnabled(true);
@@ -517,13 +520,14 @@ public class PVPCharacterPicking extends javax.swing.JFrame {
 
     private void JPBrettMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPBrettMouseClicked
         if(confirm==0){
-            objChar1.setChoice(1);
+            char1=1;
+            char2=1;
             lblChar1.setEnabled(false);
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);
             lblChar4.setEnabled(true);
         }else if(confirm==1){
-            objChar2.setChoice(1);
+            char2=1;
             lblChar1.setEnabled(false);
             lblChar2.setEnabled(true);
             lblChar3.setEnabled(true);
