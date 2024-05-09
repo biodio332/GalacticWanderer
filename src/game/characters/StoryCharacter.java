@@ -1,32 +1,54 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ 
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+*/
 package game.characters;
 
 /**
  *
- * @author Wein
- */
+ 
+@author Wein*/
 public class StoryCharacter {
-    String image,skill1,skill2,skill3,skill4;
-    int choice;
-    public StoryCharacter(int choice){
-        this.choice=choice;
+    private String image;
+    private String[] skills;
+    private int choice;
+
+    public StoryCharacter(int choice) {
+        this.choice = choice;
+        setCharacter();
     }
-    public void setCharacter(){
-        if(choice==1){
-            //set skills img
-            //image
-        }else if(choice==2){
-            //set skills img
-            //image
-        }else if(choice==3){
-            //set skills img
-            //image
-        }else if(choice==4){
-            //set skills img
-            //image
+
+    private void setCharacter() {
+        Character character = new Character();
+        character.setChoice(choice);
+        skills = character.getSkills();
+
+        //IMAGE BASED ON CHARACTER
+        switch (choice) {
+            case 1:
+                image = "image_gabe.png";
+                break;
+            case 2:
+                image = "image_brett.png";
+                break;
+            case 3:
+                image = "image_migan.png";
+                break;
+            case 4:
+                image = "image_sir_khai.png";
+                break;
+            default:
+                image = "default_image.png";
+                break;
         }
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String[] getSkills() {
+        return skills;
     }
 }
